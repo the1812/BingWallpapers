@@ -61,14 +61,19 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\BindingCommand.cs" />
-    <Compile Include="Model\Languages\Language.cs" />
-    <Compile Include="Model\Languages\MainLanguage.cs" />
+    <Compile Include="Languages\WizardLanguage.cs" />
+    <Compile Include="ViewModel\BindingCommand.cs" />
+    <Compile Include="Languages\Language.cs" />
+    <Compile Include="Languages\MainLanguage.cs" />
     <Compile Include="NotificationObject.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
+    <Compile Include="ViewModel\WizardViewModel.cs" />
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WizardView.xaml.cs">
+      <DependentUpon>WizardView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -103,7 +108,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\WizardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Model\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

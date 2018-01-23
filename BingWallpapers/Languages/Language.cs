@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Ace;
 using System.Globalization;
 
-namespace BingWallpapers.Model.Languages
+namespace BingWallpapers.Languages
 {
     abstract class Language : NotificationObject
     {
@@ -70,9 +70,6 @@ namespace BingWallpapers.Model.Languages
             Culture = CultureInfo.CurrentUICulture;
         }
         protected abstract void LoadTranslationList();
-        private void reloadCulture()
-        {
-            cachedDictionary = Dictionary;
-        }
+        private void reloadCulture() => cachedDictionary = Dictionary;
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using BingWallpapers.Model.Languages;
+using BingWallpapers.Languages;
 
 namespace BingWallpapers.ViewModel
 {
@@ -19,5 +19,6 @@ namespace BingWallpapers.ViewModel
         }
         public TView View { get; private set; }
         protected TLanguage Language { get; private set; }
+        public string this[string key] => Language?[key];
     }
 }

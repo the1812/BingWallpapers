@@ -8,10 +8,31 @@
   xmlns:vm="clr-namespace:BingWallpapers.ViewModel"
   mc:Ignorable="d"
   WindowStartupLocation="CenterScreen"
-  Title="{Binding WindowTitle}"
+  Title="{Binding [WindowTitle]}"
   Height="618"
   Width="1000">
-  <Grid>
-
+  <Grid
+    Background="{DynamicResource TitleBarColor}">
+    <Rectangle
+      Fill="White"
+      RadiusX="20"
+      RadiusY="20"
+      Margin="20,20,20,-20">
+      <Rectangle.CacheMode>
+        <BitmapCache
+          SnapsToDevicePixels="False"
+          RenderAtScale="1" />
+      </Rectangle.CacheMode>
+      <Rectangle.Effect>
+        <DropShadowEffect
+          ShadowDepth="0"
+          Color="Black"
+          Opacity="0.5"
+          BlurRadius="10" />
+      </Rectangle.Effect>
+    </Rectangle>
+    <Frame
+      Source="WizardView.xaml"
+      Margin="40,40,40,20" />
   </Grid>
 </Window>

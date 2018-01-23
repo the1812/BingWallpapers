@@ -1,3 +1,4 @@
+﻿using BingWallpapers.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,21 +11,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BingWallpapers.Languages;
-using BingWallpapers.ViewModel;
 
 namespace BingWallpapers.View
 {
     /// <summary>
-    /// MainView.xaml 的交互逻辑
+    /// WizardView.xaml 的交互逻辑
     /// </summary>
-    public partial class MainView : Window
+    public partial class WizardView : Page
     {
-        public MainView()
+        public WizardView()
         {
             InitializeComponent();
-            DataContext = new MainViewModel(this);
+            DataContext = new WizardViewModel(this);
         }
     }
 }

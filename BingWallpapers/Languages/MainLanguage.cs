@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BingWallpapers.Model.Languages
+namespace BingWallpapers.Languages
 {
     sealed class MainLanguage : Language
     {
@@ -16,11 +16,11 @@ namespace BingWallpapers.Model.Languages
             };
             simplifiedChinese = new List<string>
             {
-                "窗口标题",
+                "Bing 壁纸",
             };
             americanEnglish = new List<string>
             {
-                "Window Title",
+                "Bing Wallpapers",
             };
         }
     }

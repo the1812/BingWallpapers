@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace BingWallpapers.Model
+namespace BingWallpapers.ViewModel
 {
     sealed class BindingCommand : ICommand
     {
