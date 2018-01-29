@@ -39,6 +39,7 @@
         Text="{Binding Path, Mode=TwoWay}"
         Height="40" />
       <Button
+        IsEnabled="{Binding IsButtonEnabled}"
         Command="{Binding BrowseCommand}"
         HorizontalAlignment="Left"
         Margin="5,0,0,0"
@@ -48,6 +49,8 @@
         Content="{Binding [Browse]}" />
     </Grid>
     <Button
+      Command="{Binding OKCommand}"
+      IsEnabled="{Binding IsButtonEnabled}"
       Grid.Row="2"
       Height="60"
       Width="200"

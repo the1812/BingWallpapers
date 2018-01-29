@@ -64,6 +64,7 @@
     </Compile>
     <Compile Include="Languages\WizardLanguage.cs" />
     <Compile Include="Model\Locales.cs" />
+    <Compile Include="Model\Settings.cs" />
     <Compile Include="ViewModel\BindingCommand.cs" />
     <Compile Include="Languages\Language.cs" />
     <Compile Include="Languages\MainLanguage.cs" />

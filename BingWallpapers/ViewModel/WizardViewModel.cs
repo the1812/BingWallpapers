@@ -11,6 +11,17 @@ namespace BingWallpapers.ViewModel
     sealed partial class WizardViewModel : ViewModel<WizardView, WizardLanguage>
     {
         public WizardViewModel(WizardView view) : base(view, new WizardLanguage()) { }
+        
+        private bool isButtonEnabled = true;
+        public bool IsButtonEnabled
+        {
+            get => isButtonEnabled;
+            set
+            {
+                isButtonEnabled = value;
+                OnPropertyChanged(nameof(IsButtonEnabled));
+            }
+        }
 
         private string path;
         public string Path

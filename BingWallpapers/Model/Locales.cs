@@ -9,7 +9,7 @@ namespace BingWallpapers.Model
 {
     static class Locales
     {
-        private const string FileName = "locales.json";
+        internal const string FileName = "locales.json";
         public static Dictionary<string, string> Dictionary => localeStrings;
         private static Dictionary<string, string> localeStrings;
         static Locales()
