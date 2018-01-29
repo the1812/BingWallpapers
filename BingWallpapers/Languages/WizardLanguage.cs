@@ -12,15 +12,21 @@ namespace BingWallpapers.Languages
         {
             keys = new List<string>
             {
-                "WelcomeText",
+                "Title",
+                "OK",
+                "Browse",
             };
             simplifiedChinese = new List<string>
             {
-                "欢迎使用",
+                "下载位置设定",
+                "确定",
+                "浏览",
             };
             americanEnglish = new List<string>
             {
-                "Welcome",
+                "Select Download Folder",
+                "OK",
+                "Browse",
             };
         }
     }

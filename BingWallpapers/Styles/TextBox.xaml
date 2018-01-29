@@ -5,6 +5,12 @@
   <Style
     TargetType="TextBox">
     <Setter
+      Property="VerticalAlignment"
+      Value="Center" />
+    <Setter
+      Property="HorizontalAlignment"
+      Value="Stretch" />
+    <Setter
       Property="SelectionBrush"
       Value="{DynamicResource DwmSelectionBrush}" />
     <Setter
@@ -15,7 +21,7 @@
       Value="Center" />
     <Setter
       Property="FontSize"
-      Value="14" />
+      Value="16" />
     <Setter
       Property="BorderThickness"
       Value="0,0,0,2" />
@@ -29,6 +35,9 @@
       Property="AllowDrop"
       Value="true" />
     <Setter
+      Property="MaxWidth"
+      Value="600" />
+    <Setter
       Property="Template">
       <Setter.Value>
         <ControlTemplate
@@ -38,7 +47,7 @@
             <Border
               x:Name="border"
               BorderThickness="{TemplateBinding BorderThickness}"
-              BorderBrush="#AAA"
+              BorderBrush="#CCC"
               Background="{TemplateBinding Background}"
               SnapsToDevicePixels="True">
 
@@ -66,7 +75,7 @@
                     <ColorAnimation
                       Storyboard.TargetName="border"
                       Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
-                      To="#888"
+                      To="#AAA"
                       Duration="0:0:0.2">
                       <ColorAnimation.EasingFunction>
                         <PowerEase
@@ -82,7 +91,7 @@
                     <ColorAnimation
                       Storyboard.TargetName="border"
                       Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
-                      To="#AAA"
+                      To="#CCC"
                       Duration="0:0:0.2">
                       <ColorAnimation.EasingFunction>
                         <PowerEase
@@ -103,7 +112,7 @@
                       Storyboard.TargetName="mask"
                       Storyboard.TargetProperty="Margin"
                       To="0"
-                      Duration="0:0:0.6">
+                      Duration="0:0:0.4">
                       <ThicknessAnimation.EasingFunction>
                         <CircleEase
                           EasingMode="EaseOut" />
@@ -113,7 +122,7 @@
                       Storyboard.TargetName="mask"
                       Storyboard.TargetProperty="Opacity"
                       To="1"
-                      Duration="0:0:0.6">
+                      Duration="0:0:0.4">
                       <DoubleAnimation.EasingFunction>
                         <CircleEase
                           EasingMode="EaseOut" />
@@ -129,20 +138,20 @@
                       Storyboard.TargetName="mask"
                       Storyboard.TargetProperty="Margin"
                       To="0,0,500,0"
-                      Duration="0:0:0.6">
+                      Duration="0:0:0.4">
                       <ThicknessAnimation.EasingFunction>
                         <CircleEase
-                          EasingMode="EaseOut" />
+                          EasingMode="EaseInOut" />
                       </ThicknessAnimation.EasingFunction>
                     </ThicknessAnimation>
                     <DoubleAnimation
                       Storyboard.TargetName="mask"
                       Storyboard.TargetProperty="Opacity"
                       To="0"
-                      Duration="0:0:0.6">
+                      Duration="0:0:0.4">
                       <DoubleAnimation.EasingFunction>
                         <CircleEase
-                          EasingMode="EaseOut" />
+                          EasingMode="EaseInOut" />
                       </DoubleAnimation.EasingFunction>
                     </DoubleAnimation>
                   </Storyboard>

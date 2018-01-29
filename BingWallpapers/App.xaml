@@ -9,6 +9,8 @@
       <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary
           Source="Styles/TextBox.xaml" />
+        <ResourceDictionary
+          Source="Styles/Button.xaml" />
       </ResourceDictionary.MergedDictionaries>
       <SolidColorBrush
         x:Key="DwmSelectionBrush"
