@@ -6,8 +6,12 @@
   StartupUri="View/MainView.xaml">
   <Application.Resources>
     <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary
+          Source="Styles/TextBox.xaml" />
+      </ResourceDictionary.MergedDictionaries>
       <SolidColorBrush
-        x:Key="DwmColor"
+        x:Key="DwmBrush"
         Color="{x:Static wpf:DwmEffect.ColorizationColor}" />
       <SolidColorBrush
         x:Key="TitleBarColor"

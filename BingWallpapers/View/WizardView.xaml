@@ -23,5 +23,13 @@
       <TextBlock
         Text="{Binding [WelcomeText]}" />
     </Viewbox>
+
+    <TextBox
+      Grid.Row="1"
+      HorizontalAlignment="Stretch"
+      VerticalAlignment="Center"
+      Height="30"
+      MaxWidth="800"/>
+
   </Grid>
 </Page>

@@ -15,11 +15,15 @@ namespace BingWallpapers.ViewModel
     {
         public MainViewModel(MainView view) : base(view, new MainLanguage())
         {
-            view.OnColorizationChanged(color =>
+            view.Loaded += (s, e) =>
             {
-                Application.Current.Resources["DwmColor"] = new SolidColorBrush(color);
-                Application.Current.Resources["TitleBarColor"] = new SolidColorBrush(DwmEffect.WindowTitleColor);
-            });
+                view.OnColorizationChanged(color =>
+                {
+                    //Application.Current.Resources["DwmColor"] = color;
+                    Application.Current.Resources["DwmBrush"] = new SolidColorBrush(color);
+                    Application.Current.Resources["TitleBarColor"] = new SolidColorBrush(DwmEffect.WindowTitleColor);
+                });
+            };
         }
 
     }

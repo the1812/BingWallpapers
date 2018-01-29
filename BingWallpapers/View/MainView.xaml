@@ -32,6 +32,7 @@
       </Rectangle.Effect>
     </Rectangle>
     <Frame
+      IsTabStop="False"
       Source="WizardView.xaml"
       Margin="40,40,40,20" />
   </Grid>
