@@ -5,13 +5,8 @@
   <Style
     TargetType="TextBox">
     <Setter
-      Property="SelectionBrush">
-      <Setter.Value>
-        <SolidColorBrush
-          Color="{DynamicResource DwmBrush.Color}"
-          Opacity="0.3" />
-      </Setter.Value>
-    </Setter>
+      Property="SelectionBrush"
+      Value="{DynamicResource DwmSelectionBrush}" />
     <Setter
       Property="Padding"
       Value="4,0" />
@@ -171,7 +166,7 @@
         </MultiTrigger.Conditions>
         <Setter
           Property="SelectionBrush"
-          Value="#3000" />
+          Value="#3555" />
       </MultiTrigger>
     </Style.Triggers>
   </Style>

@@ -11,6 +11,10 @@
           Source="Styles/TextBox.xaml" />
       </ResourceDictionary.MergedDictionaries>
       <SolidColorBrush
+        x:Key="DwmSelectionBrush"
+        Color="{x:Static wpf:DwmEffect.ColorizationColor}" 
+        Opacity="0.5"/>
+      <SolidColorBrush
         x:Key="DwmBrush"
         Color="{x:Static wpf:DwmEffect.ColorizationColor}" />
       <SolidColorBrush

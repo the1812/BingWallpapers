@@ -7,13 +7,13 @@ using System.Windows;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("BingWallpapers")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Bing Wallpapers")]
+[assembly: AssemblyDescription("Bing Wallpapers")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BingWallpapers")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("Ace Studio")]
+[assembly: AssemblyProduct("Bing Wallpapers")]
+[assembly: AssemblyCopyright("Copyright © Ace Studio 2017")]
+[assembly: AssemblyTrademark("Ace Studio")]
 [assembly: AssemblyCulture("")]
 
 // 将 ComVisible 设置为 false 会使此程序集中的类型

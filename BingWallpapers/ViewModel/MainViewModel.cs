@@ -19,7 +19,7 @@ namespace BingWallpapers.ViewModel
             {
                 view.OnColorizationChanged(color =>
                 {
-                    //Application.Current.Resources["DwmColor"] = color;
+                    Application.Current.Resources["DwmSelectionBrush"] = new SolidColorBrush(color) { Opacity = 0.5 };
                     Application.Current.Resources["DwmBrush"] = new SolidColorBrush(color);
                     Application.Current.Resources["TitleBarColor"] = new SolidColorBrush(DwmEffect.WindowTitleColor);
                 });
