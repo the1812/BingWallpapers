@@ -57,13 +57,32 @@
                 HorizontalScrollBarVisibility="Hidden"
                 VerticalScrollBarVisibility="Hidden" />
             </Border>
-            <Border
-              Opacity="0"
-              x:Name="mask"
-              Margin="0,0,500,0"
-              BorderThickness="{TemplateBinding BorderThickness}"
-              BorderBrush="{DynamicResource DwmBrush}">
-            </Border>
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition
+                  Width="1*" />
+                <ColumnDefinition
+                  Width="1*" />
+              </Grid.ColumnDefinitions>
+              
+              <Border
+                Grid.Column="0"
+                Opacity="0"
+                x:Name="left"
+                Margin="500,0,0,0"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                BorderBrush="{DynamicResource DwmBrush}">
+              </Border>
+              <Border
+                Grid.Column="1"
+                Opacity="0"
+                x:Name="right"
+                Margin="0,0,500,0"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                BorderBrush="{DynamicResource DwmBrush}">
+              </Border>
+              
+            </Grid>
           </Grid>
           <ControlTemplate.Triggers>
             <Trigger
@@ -109,7 +128,7 @@
                 <BeginStoryboard>
                   <Storyboard>
                     <ThicknessAnimation
-                      Storyboard.TargetName="mask"
+                      Storyboard.TargetName="left"
                       Storyboard.TargetProperty="Margin"
                       To="0"
                       Duration="0:0:0.4">
@@ -119,7 +138,27 @@
                       </ThicknessAnimation.EasingFunction>
                     </ThicknessAnimation>
                     <DoubleAnimation
-                      Storyboard.TargetName="mask"
+                      Storyboard.TargetName="left"
+                      Storyboard.TargetProperty="Opacity"
+                      To="1"
+                      Duration="0:0:0.4">
+                      <DoubleAnimation.EasingFunction>
+                        <CircleEase
+                          EasingMode="EaseOut" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                    <ThicknessAnimation
+                      Storyboard.TargetName="right"
+                      Storyboard.TargetProperty="Margin"
+                      To="0"
+                      Duration="0:0:0.4">
+                      <ThicknessAnimation.EasingFunction>
+                        <CircleEase
+                          EasingMode="EaseOut" />
+                      </ThicknessAnimation.EasingFunction>
+                    </ThicknessAnimation>
+                    <DoubleAnimation
+                      Storyboard.TargetName="right"
                       Storyboard.TargetProperty="Opacity"
                       To="1"
                       Duration="0:0:0.4">
@@ -135,7 +174,27 @@
                 <BeginStoryboard>
                   <Storyboard>
                     <ThicknessAnimation
-                      Storyboard.TargetName="mask"
+                      Storyboard.TargetName="left"
+                      Storyboard.TargetProperty="Margin"
+                      To="500,0,0,0"
+                      Duration="0:0:0.4">
+                      <ThicknessAnimation.EasingFunction>
+                        <CircleEase
+                          EasingMode="EaseInOut" />
+                      </ThicknessAnimation.EasingFunction>
+                    </ThicknessAnimation>
+                    <DoubleAnimation
+                      Storyboard.TargetName="left"
+                      Storyboard.TargetProperty="Opacity"
+                      To="0"
+                      Duration="0:0:0.4">
+                      <DoubleAnimation.EasingFunction>
+                        <CircleEase
+                          EasingMode="EaseInOut" />
+                      </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                    <ThicknessAnimation
+                      Storyboard.TargetName="right"
                       Storyboard.TargetProperty="Margin"
                       To="0,0,500,0"
                       Duration="0:0:0.4">
@@ -145,7 +204,7 @@
                       </ThicknessAnimation.EasingFunction>
                     </ThicknessAnimation>
                     <DoubleAnimation
-                      Storyboard.TargetName="mask"
+                      Storyboard.TargetName="right"
                       Storyboard.TargetProperty="Opacity"
                       To="0"
                       Duration="0:0:0.4">
