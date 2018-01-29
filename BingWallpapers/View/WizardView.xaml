@@ -36,8 +36,10 @@
           Width="180" />
       </Grid.ColumnDefinitions>
       <TextBox
+        Text="{Binding Path, Mode=TwoWay}"
         Height="40" />
       <Button
+        Command="{Binding BrowseCommand}"
         HorizontalAlignment="Left"
         Margin="5,0,0,0"
         Grid.Column="1"
@@ -50,7 +52,6 @@
       Height="60"
       Width="200"
       FontSize="22"
-      
       Content="{Binding [OK]}" />
 
   </Grid>

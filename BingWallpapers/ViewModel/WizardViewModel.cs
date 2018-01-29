@@ -8,8 +8,20 @@ using System.Threading.Tasks;
 
 namespace BingWallpapers.ViewModel
 {
-    sealed class WizardViewModel : ViewModel<WizardView, WizardLanguage>
+    sealed partial class WizardViewModel : ViewModel<WizardView, WizardLanguage>
     {
         public WizardViewModel(WizardView view) : base(view, new WizardLanguage()) { }
+
+        private string path;
+        public string Path
+        {
+            get => path;
+            set
+            {
+                path = value;
+                OnPropertyChanged(nameof(Path));
+            }
+        }
+
     }
 }
