@@ -11,10 +11,17 @@
   Title="WizardView">
 
   <Grid>
-    <TextBlock
-      Margin="0,10,0,0"
-      HorizontalAlignment="Center"
-      VerticalAlignment="Top"
-      Text="{Binding [WelcomeText]}" />
+    <Grid.RowDefinitions>
+      <RowDefinition
+        Height="80" />
+      <RowDefinition
+        Height="1*" />
+    </Grid.RowDefinitions>
+    <Viewbox
+      Stretch="Uniform"
+      Margin="0,10">
+      <TextBlock
+        Text="{Binding [WelcomeText]}" />
+    </Viewbox>
   </Grid>
 </Page>
