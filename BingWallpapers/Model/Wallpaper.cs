@@ -88,7 +88,7 @@ namespace BingWallpapers.Model
                         DownloadUrl = $"https://www.bing.com{json["url"].StringValue}";
                         Copyright = json["copyright"].StringValue;
                         Hash = json["hsh"].StringValue;
-                        if (!hash.Contains(Hash))
+                        if (!hash.Contains(Hash) && IsDownloaded)
                         {
                             hash.Add(Hash);
                             Debug.WriteLine($"Hash added: {Hash}");
@@ -130,6 +130,8 @@ namespace BingWallpapers.Model
                         {
                             client.DownloadFileAsTask(DownloadUrl, FullFileName, tokenSource.Token).Wait();
                             Debug.WriteLine($"Downloaded: {LocaleName}");
+                            hash.Add(Hash);
+                            Debug.WriteLine($"Hash added: {Hash}");
                         }
                         else
                         {

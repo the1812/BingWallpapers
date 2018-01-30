@@ -169,6 +169,7 @@ namespace BingWallpapers.ViewModel
         private void cancelCheck()
         {
             canceled = true;
+            IsButtonEnabled = false;
             wallpapers?.ForEach(w => w.CancelDownload());
             CancelButtonText = this["Canceling"];
         }
