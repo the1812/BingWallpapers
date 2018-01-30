@@ -10,6 +10,9 @@ using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
+using BingWallpapers.Model;
+using System.IO;
 
 namespace BingWallpapers.ViewModel
 {
@@ -17,6 +20,10 @@ namespace BingWallpapers.ViewModel
     {
         public MainViewModel(MainView view) : base(view, new MainLanguage())
         {
+            if (DwmEffect.WindowTitleColor == Colors.White)
+            {
+                view.Icon = new BitmapImage(new Uri("../Bing.Logo.ico", UriKind.Relative));
+            }
             view.Loaded += (s, e) =>
             {
                 view.OnColorizationChanged(color =>
@@ -25,7 +32,14 @@ namespace BingWallpapers.ViewModel
                     Application.Current.Resources["DwmBrush"] = new SolidColorBrush(color);
                     Application.Current.Resources["TitleBarColor"] = new SolidColorBrush(DwmEffect.WindowTitleColor);
                 });
-                Navigate(new Uri("../View/WizardView.xaml", UriKind.Relative));
+                if (Directory.Exists(Settings.DownloadPath))
+                {
+                    Navigate(new Uri("../View/CheckView.xaml", UriKind.Relative));
+                }
+                else
+                {
+                    Navigate(new Uri("../View/WizardView.xaml", UriKind.Relative));
+                }
             };
             Current = this;
         }

@@ -139,6 +139,7 @@ namespace BingWallpapers.ViewModel
                 await wallpaper.Download();
                 CheckedLocale++;
             }
+            await Task.Delay(500);
             if (!canceled)
             {
                 Title = this["CompleteTitle"];
