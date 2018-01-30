@@ -5,6 +5,12 @@
   <Style
     TargetType="TextBox">
     <Setter
+      Property="CaretBrush"
+      Value="{DynamicResource DwmBrush}" />
+    <Setter
+      Property="Foreground"
+      Value="#444" />
+    <Setter
       Property="VerticalAlignment"
       Value="Center" />
     <Setter

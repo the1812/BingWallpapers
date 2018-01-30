@@ -24,6 +24,7 @@ namespace BingWallpapers.ViewModel
                     ShowNewFolderButton = true,
                 };
                 var result = DialogResult.Cancel;
+                await Task.Delay(500);
                 await Task.Run(() =>
                 {
                     View.Dispatcher.Invoke(() =>
