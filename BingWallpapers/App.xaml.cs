@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BingWallpapers.Model;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,15 @@ namespace BingWallpapers
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            Settings.Load();
+            base.OnStartup(e);
+        }
+        protected override void OnExit(ExitEventArgs e)
+        {
+            Settings.Save();
+            base.OnExit(e);
+        }
     }
 }

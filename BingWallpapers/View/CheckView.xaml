@@ -6,15 +6,43 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:local="clr-namespace:BingWallpapers.View"
   mc:Ignorable="d"
-  KeepAlive="True"
+  KeepAlive="False"
   d:DesignHeight="300"
   d:DesignWidth="300"
   Title="CheckView">
 
   <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition
+        Height="1*" />
+      <RowDefinition
+        Height="1*" />
+      <RowDefinition
+        Height="80" />
+    </Grid.RowDefinitions>
+    
     <TextBlock
+      Grid.Row="0"
+      Margin="0,0,0,10"
+      VerticalAlignment="Bottom"
       Foreground="#444"
       FontSize="32"
       Text="{Binding [Checking]}" />
+    <ProgressBar
+      Minimum="0"
+      Maximum="{Binding LocaleCount}"
+      Value="{Binding CheckedLocale}"
+      Grid.Row="1"
+      Margin="50,50,50,0"
+      VerticalAlignment="Top" />
+
+    <Button
+      Command="{Binding CancelCommand}"
+      Content="{Binding [Cancel]}"
+      Grid.Row="2"
+      Height="60"
+      Width="200"
+      FontSize="22"/>
+
   </Grid>
 </Page>

@@ -8,6 +8,9 @@ namespace BingWallpapers.ViewModel
 {
     partial class CheckViewModel
     {
-
+        public BindingCommand CancelCommand => new BindingCommand
+        {
+            ExecuteAction = o => cancelCheck(),
+        };
     }
 }

@@ -38,8 +38,8 @@ namespace BingWallpapers.Model
         private static void fillDefault()
         {
 
-            DownloadPath = null;
+            DownloadPath = "";
         }
-        public static string DownloadPath { get; set; } 
+        public static string DownloadPath { get; set; } = "";
     }
 }

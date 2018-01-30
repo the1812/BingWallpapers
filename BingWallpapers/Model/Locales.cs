@@ -11,6 +11,8 @@ namespace BingWallpapers.Model
     {
         internal const string FileName = "locales.json";
         public static Dictionary<string, string> Dictionary => localeStrings;
+        public static List<Wallpaper> Wallpapers 
+            => new List<Wallpaper>(localeStrings.Select(p => new Wallpaper(p.Value, p.Key)));
         private static Dictionary<string, string> localeStrings;
         static Locales()
         {

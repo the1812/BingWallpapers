@@ -1,4 +1,5 @@
 ﻿using BingWallpapers.Languages;
+using BingWallpapers.Model;
 using BingWallpapers.View;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace BingWallpapers.ViewModel
             }
         }
 
-        private string path;
+        private string path = Settings.DownloadPath;
         public string Path
         {
             get => path;

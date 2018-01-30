@@ -13,6 +13,8 @@
           Source="Styles/Button.xaml" />
         <ResourceDictionary
           Source="Styles/TextBlock.xaml" />
+        <ResourceDictionary
+          Source="Styles/ProgressBar.xaml" />
       </ResourceDictionary.MergedDictionaries>
       <SolidColorBrush
         x:Key="DwmSelectionBrush"
