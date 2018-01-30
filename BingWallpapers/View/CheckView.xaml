@@ -31,6 +31,7 @@
       FontSize="32"
       Text="{Binding Title}" />
     <ProgressBar
+      IsTabStop="False"
       Minimum="0"
       Maximum="{Binding LocaleCount}"
       Value="{Binding CheckedLocale}"

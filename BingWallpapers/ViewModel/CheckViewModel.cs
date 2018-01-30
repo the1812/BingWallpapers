@@ -5,6 +5,7 @@ using BingWallpapers.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -119,40 +120,51 @@ namespace BingWallpapers.ViewModel
             wallpapers = Locales.Wallpapers;
             Wallpaper.ResetHash();
             CheckedLocale = 0;
-            foreach (var wallpaper in wallpapers)
+            try
             {
-                if (canceled)
+                foreach (var wallpaper in wallpapers)
                 {
-                    break;
+                    if (canceled)
+                    {
+                        break;
+                    }
+                    Title = String.Format(this["CheckingLocale"], wallpaper.FriendlyLocaleName);
+                    await wallpaper.DownloadInfo();
+                    CheckedLocale++;
                 }
-                Title = String.Format(this["CheckingLocale"], wallpaper.FriendlyLocaleName);
-                await wallpaper.DownloadInfo();
-                CheckedLocale++;
-            }
-            foreach (var wallpaper in wallpapers)
-            {
-                if (canceled)
+                foreach (var wallpaper in wallpapers)
                 {
-                    break;
+                    if (canceled)
+                    {
+                        break;
+                    }
+                    Title = String.Format(this["DownloadingLocale"], wallpaper.FriendlyLocaleName);
+                    await wallpaper.Download();
+                    CheckedLocale++;
                 }
-                Title = String.Format(this["DownloadingLocale"], wallpaper.FriendlyLocaleName);
-                await wallpaper.Download();
-                CheckedLocale++;
+                await Task.Delay(500);
+                if (!canceled)
+                {
+                    Title = this["CompleteTitle"];
+                }
+                else
+                {
+                    Title = this["CanceledTitle"];
+                    CheckedLocale = LocaleCount * 2;
+                }
+                Message = String.Format(this["CompleteMessage"], Wallpaper.HashCount);
             }
-            await Task.Delay(500);
-            if (!canceled)
+            catch (WebException ex)
             {
-                Title = this["CompleteTitle"];
+                Title = this["FailedTitle"];
+                Message = ex.Message;
             }
-            else
+            finally
             {
-                Title = this["CanceledTitle"];
-                CheckedLocale = LocaleCount * 2;
+                CancelButtonVisibility = Visibility.Collapsed;
+                CompleteButtonVisibility = Visibility.Visible;
+                IsButtonEnabled = true;
             }
-            Message = String.Format(this["CompleteMessage"], Wallpaper.HashCount);
-            CancelButtonVisibility = Visibility.Collapsed;
-            CompleteButtonVisibility = Visibility.Visible;
-            IsButtonEnabled = true;
         }
         private void cancelCheck()
         {

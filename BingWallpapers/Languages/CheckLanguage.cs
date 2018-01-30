@@ -21,6 +21,7 @@ namespace BingWallpapers.Languages
                 "Canceling",
                 "CanceledTitle",
                 "DownloadingLocale",
+                "FailedTitle",
             };
             simplifiedChinese = new List<string>
             {
@@ -33,6 +34,7 @@ namespace BingWallpapers.Languages
                 "取消中",
                 "已取消",
                 "正在下载 {0}",
+                "下载失败",
             };
             americanEnglish = new List<string>
             {
@@ -45,6 +47,7 @@ namespace BingWallpapers.Languages
                 "Canceling",
                 "Cenceled",
                 "Downloading from {0}",
+                "Download failed",
             };
         }
     }
