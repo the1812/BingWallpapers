@@ -45,14 +45,11 @@ namespace BingWallpapers.ViewModel
         {
             wallpapers = Locales.Wallpapers;
             CheckedLocale = 0;
-            await Task.Run(() =>
+            foreach (var wallpaper in wallpapers)
             {
-                foreach (var wallpaper in wallpapers)
-                {
-                    wallpaper.Download();
-                    CheckedLocale++;
-                }
-            });
+                await wallpaper.Download();
+                CheckedLocale++;
+            }
         }
         private void cancelCheck() => wallpapers?.ForEach(w => w.CancelDownload());
     }
