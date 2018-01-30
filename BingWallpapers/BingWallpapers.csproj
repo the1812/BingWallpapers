@@ -74,6 +74,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Languages\CheckLanguage.cs" />
     <Compile Include="Languages\WizardLanguage.cs" />
     <Compile Include="Model\Locales.cs" />
     <Compile Include="Model\Settings.cs" />
@@ -81,10 +82,15 @@
     <Compile Include="Languages\Language.cs" />
     <Compile Include="Languages\MainLanguage.cs" />
     <Compile Include="NotificationObject.cs" />
+    <Compile Include="ViewModel\CheckViewModel.Commands.cs" />
+    <Compile Include="ViewModel\CheckViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
     <Compile Include="ViewModel\WizardViewModel.Commands.cs" />
     <Compile Include="ViewModel\WizardViewModel.cs" />
+    <Compile Include="View\CheckView.xaml.cs">
+      <DependentUpon>CheckView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
@@ -125,7 +131,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Styles\TextBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\TextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CheckView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

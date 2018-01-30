@@ -9,6 +9,8 @@
   mc:Ignorable="d"
   WindowStartupLocation="CenterScreen"
   Title="{Binding [WindowTitle]}"
+  MinHeight="618"
+  MinWidth="1000"
   Height="618"
   Width="1000">
   <Grid

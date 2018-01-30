@@ -8,6 +8,7 @@ using BingWallpapers.View;
 using Ace.Wpf;
 using System.Windows.Media;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace BingWallpapers.ViewModel
 {
@@ -24,6 +25,17 @@ namespace BingWallpapers.ViewModel
                     Application.Current.Resources["TitleBarColor"] = new SolidColorBrush(DwmEffect.WindowTitleColor);
                 });
             };
+        }
+
+        private Page source = new WizardView();
+        public Page Source
+        {
+            get => source;
+            set
+            {
+                source = value;
+                OnPropertyChanged(nameof(Source));
+            }
         }
 
     }

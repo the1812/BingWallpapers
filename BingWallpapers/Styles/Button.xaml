@@ -4,6 +4,17 @@
   xmlns:local="clr-namespace:BingWallpapers.Styles">
   <Style
     TargetType="Button">
+    <!--<Setter
+      Property="Effect">
+      <Setter.Value>
+        <DropShadowEffect
+          Direction="-90"
+          ShadowDepth="3"
+          BlurRadius="10"
+          Opacity="0.3"
+          Color="Black" />
+      </Setter.Value>
+    </Setter>-->
     <Setter
       Property="HorizontalAlignment"
       Value="Center" />
@@ -32,14 +43,14 @@
             <Border
               x:Name="border"
               Background="{TemplateBinding Background}"
-              CornerRadius="5">
+              CornerRadius="6">
               <ContentPresenter
                 x:Name="content"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center" />
             </Border>
             <Border
-              CornerRadius="5"
+              CornerRadius="6"
               Background="#0000"
               x:Name="mask">
               <Ellipse
