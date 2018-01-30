@@ -27,16 +27,16 @@ namespace BingWallpapers.ViewModel
             };
         }
 
-        private Page source = new WizardView();
-        public Page Source
-        {
-            get => source;
-            set
-            {
-                source = value;
-                OnPropertyChanged(nameof(Source));
-            }
-        }
+        //private Page source = new WizardView();
+        //public Page Source
+        //{
+        //    get => source;
+        //    set
+        //    {
+        //        source = value;
+        //        OnPropertyChanged(nameof(Source));
+        //    }
+        //}
 
     }
 }

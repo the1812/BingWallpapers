@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BingWallpapers.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace BingWallpapers.View
         public CheckView()
         {
             InitializeComponent();
+            DataContext = new CheckViewModel(this);
         }
     }
 }

@@ -34,6 +34,7 @@
       </Rectangle.Effect>
     </Rectangle>
     <Frame
+      NavigationUIVisibility="Hidden"
       IsTabStop="False"
       Source="WizardView.xaml"
       Margin="40,40,40,20" />

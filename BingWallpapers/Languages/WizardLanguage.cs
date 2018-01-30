@@ -15,18 +15,24 @@ namespace BingWallpapers.Languages
                 "Title",
                 "OK",
                 "Browse",
+                "Error",
+                "PathNotExist",
             };
             simplifiedChinese = new List<string>
             {
                 "下载位置设定",
                 "确定",
                 "浏览",
+                "错误",
+                "下载位置不存在。",
             };
             americanEnglish = new List<string>
             {
                 "Select Download Folder",
                 "OK",
                 "Browse",
+                "Error",
+                "Download folder not exist.",
             };
         }
     }

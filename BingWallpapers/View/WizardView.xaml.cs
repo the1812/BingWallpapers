@@ -25,6 +25,11 @@ namespace BingWallpapers.View
         {
             InitializeComponent();
             DataContext = new WizardViewModel(this);
+            Loaded += async (s, e) =>
+            {
+                await Task.Delay(500);
+                FocusManager.SetFocusedElement(this, textPath);
+            };
         }
     }
 }

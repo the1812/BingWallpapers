@@ -16,11 +16,11 @@ namespace BingWallpapers.Languages
             };
             simplifiedChinese = new List<string>
             {
-                "正在检查{0}",
+                "正在检查新壁纸",
             };
             americanEnglish = new List<string>
             {
-                "Checking {0}",
+                "Checking for new wallpapers",
             };
         }
     }

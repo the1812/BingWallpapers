@@ -49,12 +49,16 @@ namespace BingWallpapers.ViewModel
                     if (Directory.Exists(Path))
                     {
                         Settings.DownloadPath = Path;
-#warning "Test code"
-                        MessageBox.Show("OK");
+                        Task.Delay(500).Wait();
+                        var uri = new Uri("../View/CheckView.xaml", UriKind.Relative);
+                        View.Dispatcher.Invoke(() =>
+                        {
+                            View.NavigationService.Navigate(uri);
+                        });
                     }
                     else
                     {
-#warning "Path not exist..."
+                        MessageBox.Show(this["PathNotExist"], this["Error"], MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 });
                 IsButtonEnabled = true;

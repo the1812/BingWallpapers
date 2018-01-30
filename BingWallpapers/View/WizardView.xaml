@@ -36,6 +36,7 @@
           Width="1*" />
       </Grid.ColumnDefinitions>
       <TextBox
+        x:Name="textPath"
         Text="{Binding Path, Mode=TwoWay}"
         Height="40" />
       <Button
