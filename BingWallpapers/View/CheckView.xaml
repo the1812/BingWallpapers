@@ -18,7 +18,9 @@
       <RowDefinition
         Height="1*" />
       <RowDefinition
-        Height="80" />
+        Height="100" />
+      <RowDefinition
+        Height="100" />
     </Grid.RowDefinitions>
     
     <TextBlock
@@ -27,7 +29,7 @@
       VerticalAlignment="Bottom"
       Foreground="#444"
       FontSize="32"
-      Text="{Binding [Checking]}" />
+      Text="{Binding Title}" />
     <ProgressBar
       Minimum="0"
       Maximum="{Binding LocaleCount}"
@@ -36,13 +38,28 @@
       Margin="50,50,50,0"
       VerticalAlignment="Top" />
 
-    <Button
-      Command="{Binding CancelCommand}"
-      Content="{Binding [Cancel]}"
+    <TextBlock
+      FontSize="20"
       Grid.Row="2"
+      Foreground="#444"
+      Text="{Binding Message}" />
+    <Button
+      Visibility="{Binding CancelButtonVisibility}"
+      Command="{Binding CancelCommand}"
+      Content="{Binding CancelButtonText}"
+      Grid.Row="3"
       Height="60"
       Width="200"
       FontSize="22"/>
+    <Button
+      IsEnabled="{Binding IsButtonEnabled}"
+      Visibility="{Binding CompleteButtonVisibility}"
+      Command="{Binding CompleteCommand}"
+      Content="{Binding [Complete]}"
+      Grid.Row="3"
+      Height="60"
+      Width="200"
+      FontSize="22" />
 
   </Grid>
 </Page>

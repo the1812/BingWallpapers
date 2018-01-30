@@ -13,6 +13,36 @@
   MinWidth="1000"
   Height="618"
   Width="1000">
+  <Window.Resources>
+    <Storyboard
+      x:Key="FadeIn">
+      <DoubleAnimation
+        Storyboard.TargetName="frame"
+        Storyboard.TargetProperty="Opacity"
+        From="0"
+        To="1"
+        Duration="0:0:0.4">
+        <DoubleAnimation.EasingFunction>
+          <CircleEase
+            EasingMode="EaseOut" />
+        </DoubleAnimation.EasingFunction>
+      </DoubleAnimation>
+    </Storyboard>
+    <Storyboard
+      x:Key="FadeOut">
+      <DoubleAnimation
+        Storyboard.TargetName="frame"
+        Storyboard.TargetProperty="Opacity"
+        From="1"
+        To="0"
+        Duration="0:0:0.4">
+        <DoubleAnimation.EasingFunction>
+          <CircleEase
+            EasingMode="EaseOut" />
+        </DoubleAnimation.EasingFunction>
+      </DoubleAnimation>
+    </Storyboard>
+  </Window.Resources>
   <Grid
     Background="{DynamicResource TitleBarColor}">
     <Rectangle
@@ -34,9 +64,10 @@
       </Rectangle.Effect>
     </Rectangle>
     <Frame
+      x:Name="frame"
       NavigationUIVisibility="Hidden"
       IsTabStop="False"
-      Source="WizardView.xaml"
+      Source="{Binding FrameSource}"
       Margin="40,40,40,20" />
   </Grid>
 </Window>

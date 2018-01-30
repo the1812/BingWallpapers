@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Ace.Files.Json;
 using BingWallpapers.Model;
+using BingWallpapers.View;
 
 namespace BingWallpapers.ViewModel
 {
@@ -53,7 +54,7 @@ namespace BingWallpapers.ViewModel
                         var uri = new Uri("../View/CheckView.xaml", UriKind.Relative);
                         View.Dispatcher.Invoke(() =>
                         {
-                            View.NavigationService.Navigate(uri);
+                            MainViewModel.Current.Navigate(uri);
                         });
                     }
                     else

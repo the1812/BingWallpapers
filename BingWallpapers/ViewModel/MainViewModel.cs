@@ -9,6 +9,7 @@ using Ace.Wpf;
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 
 namespace BingWallpapers.ViewModel
 {
@@ -24,19 +25,45 @@ namespace BingWallpapers.ViewModel
                     Application.Current.Resources["DwmBrush"] = new SolidColorBrush(color);
                     Application.Current.Resources["TitleBarColor"] = new SolidColorBrush(DwmEffect.WindowTitleColor);
                 });
+                Navigate(new Uri("../View/WizardView.xaml", UriKind.Relative));
             };
+            Current = this;
         }
+        public static MainViewModel Current { get; private set; }
+        private Storyboard FadeIn => View.FindResource("FadeIn") as Storyboard;
+        private Storyboard FadeOut => View.FindResource("FadeOut") as Storyboard;
 
-        //private Page source = new WizardView();
-        //public Page Source
+        //private double frameOpacity = 0;
+        //public double FrameOpacity
         //{
-        //    get => source;
+        //    get => frameOpacity;
         //    set
         //    {
-        //        source = value;
-        //        OnPropertyChanged(nameof(Source));
+        //        frameOpacity = value;
+        //        OnPropertyChanged(nameof(FrameOpacity));
         //    }
         //}
 
+        private Uri frameSource = null;
+        public Uri FrameSource
+        {
+            get => frameSource;
+            set
+            {
+                frameSource = value;
+                OnPropertyChanged(nameof(FrameSource));
+            }
+        }
+
+        public void Navigate(Uri page)
+        {
+            var fadeOut = FadeOut;
+            fadeOut.Completed += (s, e) =>
+            {
+                FrameSource = page;
+                FadeIn.Begin();
+            };
+            fadeOut.Begin();
+        }
     }
 }

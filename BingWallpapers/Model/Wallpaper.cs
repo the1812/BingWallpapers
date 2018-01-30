@@ -15,14 +15,17 @@ namespace BingWallpapers.Model
 {
     sealed class Wallpaper
     {
-        private static List<string> downloadedHash = new List<string>();
-        public static void ResetDownloadedHash() => downloadedHash.Clear();
+        private static List<string> hash = new List<string>();
+        public static void ResetHash() => hash.Clear();
+        public static int HashCount => hash.Count;
         public string FriendlyLocaleName { get; private set; }
         public string LocaleName { get; private set; }
         public string FileName => $"{Date.ToShortDateString()}-{LocaleName}.jpg";
         public string FullFileName => $"{Settings.DownloadPath.Backslash()}{FileName}";
         private string InfoUrl => $"https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt={LocaleName}";
         public string DownloadUrl { get; private set; }
+        public bool IsInfoDownloaded { get; private set; }
+        public bool IsInfoDownloading { get; private set; }
         public bool IsDownloaded
         {
             get
@@ -55,25 +58,24 @@ namespace BingWallpapers.Model
             LocaleName = locale;
             FriendlyLocaleName = friendlyName;
         }
-        private CancellationTokenSource tokenSource = new CancellationTokenSource();
-        public Task Download()
+        public Task DownloadInfo()
         {
-            if (IsDownloaded || IsDownloading)
-            {
-                return null;
-            }
             return Task.Run(() =>
             {
+                if (IsInfoDownloaded || IsInfoDownloading)
+                {
+                    return;
+                }
                 try
                 {
                     using (var client = new WebClient())
                     {
-                        IsDownloading = true;
-                        //tokenSource = new CancellationTokenSource();
+                        IsInfoDownloading = true;
                         client.Encoding = Encoding.UTF8;
 
                         var info = client.DownloadStringAsTask(InfoUrl, tokenSource.Token).Result;
-                        Debug.Assert(JsonObject.TryParse(info, out var json));
+                        var parseResult = JsonObject.TryParse(info, out var json);
+                        Debug.Assert(parseResult);
                         json = json["images"].ArrayValue[0].ObjectValue;
                         var timeString = json["fullstartdate"].StringValue;
                         Date = new DateTime(
@@ -86,10 +88,46 @@ namespace BingWallpapers.Model
                         DownloadUrl = $"https://www.bing.com{json["url"].StringValue}";
                         Copyright = json["copyright"].StringValue;
                         Hash = json["hsh"].StringValue;
-                        if (!downloadedHash.Contains(Hash))
+                        if (!hash.Contains(Hash))
                         {
-                            downloadedHash.Add(Hash);
+                            hash.Add(Hash);
                             Debug.WriteLine($"Hash added: {Hash}");
+                        }
+                        IsInfoDownloaded = true;
+                    }
+                }
+                catch (Exception ex)
+                when (ex is OperationCanceledException || ex is TaskCanceledException)
+                {
+                    return;
+                }
+                finally
+                {
+                    IsInfoDownloading = false;
+                }
+            });
+        }
+        private CancellationTokenSource tokenSource = new CancellationTokenSource();
+        public Task Download()
+        {
+            return Task.Run(() =>
+            {
+                if (!IsInfoDownloaded)
+                {
+                    throw new InvalidOperationException();
+                }
+                if (IsDownloaded || IsDownloading)
+                {
+                    return;
+                }
+                try
+                {
+                    using (var client = new WebClient())
+                    {
+                        IsDownloading = true;
+                        client.Encoding = Encoding.UTF8;
+                        if (!hash.Contains(Hash))
+                        {
                             client.DownloadFileAsTask(DownloadUrl, FullFileName, tokenSource.Token).Wait();
                             Debug.WriteLine($"Downloaded: {LocaleName}");
                         }
@@ -102,7 +140,7 @@ namespace BingWallpapers.Model
                 catch (Exception ex)
                 when (ex is OperationCanceledException || ex is TaskCanceledException)
                 {
-
+                    return;
                 }
                 finally
                 {
