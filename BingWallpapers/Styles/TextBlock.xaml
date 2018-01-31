@@ -13,6 +13,9 @@
     <Setter
       Property="VerticalAlignment"
       Value="Center" />
+    <Setter
+      Property="Focusable"
+      Value="False" />
     <!--<Setter
       Property="FontSize"
       Value="16" />-->

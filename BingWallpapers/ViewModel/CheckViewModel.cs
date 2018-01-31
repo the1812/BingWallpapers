@@ -18,7 +18,7 @@ namespace BingWallpapers.ViewModel
     {
         public CheckViewModel(CheckView view) : base(view, new CheckLanguage())
         {
-            LocaleCount = Locales.Dictionary.Count * 3;
+            LocaleCount = Locales.Dictionary.Count * 2;
             Title = this["Checking"];
             Message = "";
             CancelButtonText = this["Cancel"];
@@ -136,7 +136,7 @@ namespace BingWallpapers.ViewModel
                     }
                     Title = String.Format(this["CheckingLocale"], wallpaper.FriendlyLocaleName);
                     await wallpaper.DownloadInfo();
-                    CheckedLocale += 2;
+                    CheckedLocale++;
                 }
                 foreach (var wallpaper in wallpapers)
                 {
@@ -156,17 +156,14 @@ namespace BingWallpapers.ViewModel
                 {
                     await Task.Delay(500);
                     Title = this["CanceledTitle"];
-                    CheckedLocale = LocaleCount * 3;
+                    CheckedLocale = LocaleCount * 2;
                 }
                 Message = String.Format(this["CompleteMessage"], Wallpaper.DownloadedCount);
             }
-            catch (InvalidOperationException ex)
-            {
-                Title = this["FailedTitle"];
-                Message = ex.Message;
-            }
             catch (Exception ex)
-            when (ex is WebException || (ex is AggregateException && ex.InnerException is WebException))
+            when (ex is WebException ||
+                ex is InvalidOperationException ||
+                (ex is AggregateException && ex.InnerException is WebException))
             {
                 Title = this["FailedTitle"];
                 Message = ex.Message;

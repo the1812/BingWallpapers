@@ -47,6 +47,7 @@
   <Grid
     Background="{DynamicResource TitleBarColor}">
     <Rectangle
+      Focusable="False"
       Fill="White"
       RadiusX="20"
       RadiusY="20"
@@ -67,6 +68,7 @@
     <Frame
       x:Name="frame"
       NavigationUIVisibility="Hidden"
+      Focusable="False"
       IsTabStop="False"
       Source="{Binding FrameSource}"
       Margin="40,40,40,20" />
