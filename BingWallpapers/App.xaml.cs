@@ -34,6 +34,11 @@ namespace BingWallpapers
                 }
             };
             Settings.Load();
+            if (e.Args.Length > 0 && e.Args[0].ToLower() == "--silent")
+            {
+                SilentChecker.Start();
+                Shutdown();
+            }
             base.OnStartup(e);
         }
         protected override void OnExit(ExitEventArgs e)

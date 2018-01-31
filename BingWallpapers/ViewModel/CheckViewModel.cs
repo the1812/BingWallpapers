@@ -5,6 +5,7 @@ using BingWallpapers.View;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -123,6 +124,10 @@ namespace BingWallpapers.ViewModel
             CheckedLocale = 0;
             try
             {
+                if (!Directory.Exists(Settings.DownloadPath))
+                {
+                    throw new InvalidOperationException(new WizardLanguage()["PathNotExist"]);
+                }
                 foreach (var wallpaper in wallpapers)
                 {
                     if (canceled)
@@ -154,6 +159,11 @@ namespace BingWallpapers.ViewModel
                     CheckedLocale = LocaleCount * 3;
                 }
                 Message = String.Format(this["CompleteMessage"], Wallpaper.DownloadedCount);
+            }
+            catch (InvalidOperationException ex)
+            {
+                Title = this["FailedTitle"];
+                Message = ex.Message;
             }
             catch (Exception ex)
             when (ex is WebException || (ex is AggregateException && ex.InnerException is WebException))
