@@ -80,6 +80,7 @@
     </Compile>
     <Compile Include="Languages\CheckLanguage.cs" />
     <Compile Include="Languages\WizardLanguage.cs" />
+    <Compile Include="Model\ImageProcesser.cs" />
     <Compile Include="Model\Locales.cs" />
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Model\Wallpaper.cs" />

@@ -154,7 +154,8 @@ namespace BingWallpapers.ViewModel
                 }
                 Message = String.Format(this["CompleteMessage"], Wallpaper.HashCount);
             }
-            catch (WebException ex)
+            catch (Exception ex)
+            when (ex is WebException || (ex is AggregateException && ex.InnerException is WebException))
             {
                 Title = this["FailedTitle"];
                 Message = ex.Message;
