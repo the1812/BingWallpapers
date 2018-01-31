@@ -152,7 +152,7 @@ namespace BingWallpapers.ViewModel
                     Title = this["CanceledTitle"];
                     CheckedLocale = LocaleCount * 3;
                 }
-                Message = String.Format(this["CompleteMessage"], Wallpaper.HashCount);
+                Message = String.Format(this["CompleteMessage"], Wallpaper.DownloadedCount);
             }
             catch (Exception ex)
             when (ex is WebException || (ex is AggregateException && ex.InnerException is WebException))

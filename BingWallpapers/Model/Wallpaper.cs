@@ -21,8 +21,13 @@ namespace BingWallpapers.Model
         {
             jsonHash.Clear();
             imageHash.Clear();
+            DownloadedCount = 0;
+            foreach (var file in new DirectoryInfo(Settings.DownloadPath).EnumerateFiles())
+            {
+                imageHash.Add(ImageProcesser.LoadFromFile(file.FullName));
+            }
         }
-        public static int HashCount => imageHash.Count;
+        public static int DownloadedCount { get; private set; } = 0;
         private static bool containsData(byte[] data)
         {
             foreach (var image in imageHash)
@@ -35,8 +40,8 @@ namespace BingWallpapers.Model
             }
             return false;
         }
-        public string FriendlyLocaleName { get; private set; }
-        public string LocaleName { get; private set; }
+        public string FriendlyLocaleName { get; private set; } = "Unknown";
+        public string LocaleName { get; private set; } = "Unknown";
         public string FileName => $"{Date.ToShortDateString()}-{LocaleName}.jpg";
         public string FullFileName => $"{Settings.DownloadPath.Backslash()}{FileName}";
         private string InfoUrl => $"https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt={LocaleName}";
@@ -97,13 +102,14 @@ namespace BingWallpapers.Model
                         DownloadUrl = $"https://www.bing.com{json["url"].StringValue}";
                         Copyright = json["copyright"].StringValue;
                         Hash = json["hsh"].StringValue;
-                        if (IsDownloaded)
-                        {
-                            jsonHash.Add(Hash);
-                            var data = ImageProcesser.LoadFromFile(FullFileName);
-                            imageHash.Add(data);
-                            Debug.WriteLine($"Already downloaded: {data.GetHashCode()}");
-                        }
+                        //if (IsDownloaded)
+                        //{
+                        //    jsonHash.Add(Hash);
+                        //    var data = ImageProcesser.LoadFromFile(FullFileName);
+                        //    imageHash.Add(data);
+                        //    Debug.WriteLine($"Already downloaded: {data.GetHashCode()}");
+                        //}
+                        Debug.WriteLineIf(IsDownloaded, $"Already downloaded: {LocaleName}-{Hash}");
                         IsInfoDownloaded = true;
                     }
                 }
@@ -145,11 +151,12 @@ namespace BingWallpapers.Model
                         if (!jsonHash.Contains(Hash) && IsNewToday)
                         {
                             var data = client.DownloadDataAsTask(DownloadUrl, tokenSource.Token).Result;
-                            Debug.WriteLine($"Data fetched: {data.GetHashCode()}");
+                            Debug.WriteLine($"Data fetched: {LocaleName}-{data.GetHashCode()}");
                             if (!imageHash.Contains(data) && !containsData(data))
                             {
                                 ImageProcesser.SaveToFile(data, FullFileName);
                                 Debug.WriteLine($"Downloaded: {LocaleName}");
+                                DownloadedCount++;
                                 imageHash.Add(data);
                                 jsonHash.Add(Hash);
                             }
