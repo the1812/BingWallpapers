@@ -118,7 +118,6 @@ namespace BingWallpapers.ViewModel
         private async void startCheck()
         {
             canceled = false;
-            IsButtonEnabled = false;
             wallpapers = Locales.Wallpapers;
             Wallpaper.ResetHash();
             CheckedLocale = 0;
@@ -168,13 +167,6 @@ namespace BingWallpapers.ViewModel
                 CompleteButtonVisibility = Visibility.Visible;
                 IsButtonEnabled = true;
             }
-        }
-        private void cancelCheck()
-        {
-            canceled = true;
-            IsButtonEnabled = false;
-            wallpapers?.ForEach(w => w.CancelDownload());
-            CancelButtonText = this["Canceling"];
         }
     }
 }

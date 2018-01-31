@@ -27,6 +27,6 @@
       Value="Center" />
     <Setter
       Property="MaxWidth"
-      Value="600" />
+      Value="1000" />
   </Style>
 </ResourceDictionary>

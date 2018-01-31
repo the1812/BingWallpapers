@@ -30,7 +30,7 @@ namespace BingWallpapers.View
         public void SetProgress(double progress)
         {
             var storyboard = new Storyboard();
-            var animation = new DoubleAnimation(progress, TimeSpan.FromMilliseconds(200));
+            var animation = new DoubleAnimation(progress, TimeSpan.FromMilliseconds(400));
 
             storyboard.Children.Add(animation);
             Storyboard.SetTarget(animation, progressBar);

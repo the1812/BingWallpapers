@@ -37,7 +37,7 @@
       Maximum="{Binding LocaleCount}"
       Value="0"
       Grid.Row="1"
-      Margin="50,50,50,0"
+      Margin="100,50,100,0"
       VerticalAlignment="Top" />
 
     <TextBlock
@@ -46,6 +46,7 @@
       Foreground="#444"
       Text="{Binding Message}" />
     <Button
+      IsEnabled="{Binding IsButtonEnabled}"
       Visibility="{Binding CancelButtonVisibility}"
       Command="{Binding CancelCommand}"
       Content="{Binding CancelButtonText}"

@@ -11,7 +11,13 @@ namespace BingWallpapers.ViewModel
     {
         public BindingCommand CancelCommand => new BindingCommand
         {
-            ExecuteAction = o => cancelCheck(),
+            ExecuteAction = o =>
+            {
+                canceled = true;
+                IsButtonEnabled = false;
+                wallpapers?.ForEach(w => w.CancelDownload());
+                CancelButtonText = this["Canceling"];
+            },
         };
         public BindingCommand CompleteCommand => new BindingCommand
         {
