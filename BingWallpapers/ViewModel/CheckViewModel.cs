@@ -64,6 +64,7 @@ namespace BingWallpapers.ViewModel
             set
             {
                 checkedLocale = value;
+                View.SetProgress(value);
                 OnPropertyChanged(nameof(CheckedLocale));
             }
         }

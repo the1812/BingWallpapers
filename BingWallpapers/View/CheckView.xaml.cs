@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -25,6 +26,18 @@ namespace BingWallpapers.View
         {
             InitializeComponent();
             DataContext = new CheckViewModel(this);
+        }
+        public void SetProgress(double progress)
+        {
+            var storyboard = new Storyboard();
+            var animation = new DoubleAnimation(progress, TimeSpan.FromMilliseconds(200));
+
+            storyboard.Children.Add(animation);
+            Storyboard.SetTarget(animation, progressBar);
+            Storyboard.SetTargetProperty(animation, new PropertyPath("Value"));
+            animation.EasingFunction = new CircleEase { EasingMode = EasingMode.EaseOut };
+
+            storyboard.Begin();
         }
     }
 }

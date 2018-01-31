@@ -31,10 +31,11 @@
       FontSize="32"
       Text="{Binding Title}" />
     <ProgressBar
+      x:Name="progressBar"
       IsTabStop="False"
       Minimum="0"
       Maximum="{Binding LocaleCount}"
-      Value="{Binding CheckedLocale}"
+      Value="0"
       Grid.Row="1"
       Margin="50,50,50,0"
       VerticalAlignment="Top" />
