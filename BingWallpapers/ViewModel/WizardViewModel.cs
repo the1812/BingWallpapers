@@ -11,25 +11,7 @@ namespace BingWallpapers.ViewModel
 {
     sealed partial class WizardViewModel : ViewModel<WizardView, WizardLanguage>
     {
-        public WizardViewModel(WizardView view) : base(view, new WizardLanguage())
-        {
-            //if (Language.Culture.Name == "zh-CN")
-            //{
-            //    IsRestrictedNetwork = true;
-            //}
-        }
-
-        private bool isRestrictedNetwork = Settings.RestrictedNetwork;
-        public bool IsRestrictedNetwork
-        {
-            get => isRestrictedNetwork;
-            set
-            {
-                isRestrictedNetwork = value;
-                Settings.RestrictedNetwork = value;
-                OnPropertyChanged(nameof(IsRestrictedNetwork));
-            }
-        }
+        public WizardViewModel(WizardView view) : base(view, new WizardLanguage()) { }
 
         private bool isButtonEnabled = true;
         public bool IsButtonEnabled

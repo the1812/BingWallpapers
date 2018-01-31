@@ -44,7 +44,7 @@ namespace BingWallpapers.Model
         public string LocaleName { get; private set; } = "Unknown";
         public string FileName => $"{Date.ToShortDateString()}-{LocaleName}.jpg";
         public string FullFileName => $"{Settings.DownloadPath.Backslash()}{FileName}";
-        private string InfoUrl => $"https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt={LocaleName}";
+        private string InfoUrl => $"https://global.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt={LocaleName}";
         public string DownloadUrl { get; private set; }
         public bool IsInfoDownloaded { get; private set; }
         public bool IsInfoDownloading { get; private set; }
@@ -66,6 +66,19 @@ namespace BingWallpapers.Model
         }
         public string Copyright { get; private set; }
         public string Hash { get; private set; }
+        private WebClient getWebClient()
+        {
+            var webClient = new WebClient
+            {
+                Encoding = Encoding.UTF8,
+            };
+            //var headers = webClient.Headers;
+            //headers["Accept"] = "text/html, application/xhtml+xml, image/jxr, */*";
+            //headers["Accept-Encoding"] = "gzip, deflate, br";
+            //headers["Accept-Language"] = LocaleName;
+            //headers["User-Agent"] = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299";
+            return webClient;
+        }
 
         public Wallpaper(string locale, string friendlyName)
         {
@@ -82,11 +95,9 @@ namespace BingWallpapers.Model
                 }
                 try
                 {
-                    using (var client = new WebClient())
+                    using (var client = getWebClient())
                     {
                         IsInfoDownloading = true;
-                        client.Encoding = Encoding.UTF8;
-
                         var info = client.DownloadStringAsTask(InfoUrl, tokenSource.Token).Result;
                         var parseResult = JsonObject.TryParse(info, out var json);
                         Debug.Assert(parseResult);
@@ -102,13 +113,6 @@ namespace BingWallpapers.Model
                         DownloadUrl = $"https://www.bing.com{json["url"].StringValue}";
                         Copyright = json["copyright"].StringValue;
                         Hash = json["hsh"].StringValue;
-                        //if (IsDownloaded)
-                        //{
-                        //    jsonHash.Add(Hash);
-                        //    var data = ImageProcesser.LoadFromFile(FullFileName);
-                        //    imageHash.Add(data);
-                        //    Debug.WriteLine($"Already downloaded: {data.GetHashCode()}");
-                        //}
                         Debug.WriteLineIf(IsDownloaded, $"Already downloaded: {LocaleName}-{Hash}");
                         IsInfoDownloaded = true;
                     }
@@ -144,11 +148,10 @@ namespace BingWallpapers.Model
                 }
                 try
                 {
-                    using (var client = new WebClient())
+                    using (var client = getWebClient())
                     {
                         IsDownloading = true;
-                        client.Encoding = Encoding.UTF8;
-                        if (!jsonHash.Contains(Hash) && IsNewToday)
+                        if (!jsonHash.Contains(Hash)/* && IsNewToday*/)
                         {
                             var data = client.DownloadDataAsTask(DownloadUrl, tokenSource.Token).Result;
                             Debug.WriteLine($"Data fetched: {LocaleName}-{data.GetHashCode()}");

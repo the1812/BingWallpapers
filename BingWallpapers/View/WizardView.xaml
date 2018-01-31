@@ -51,10 +51,10 @@
         Width="150"
         Content="{Binding [Browse]}" />
     </Grid>
-    <CheckBox
+    <!--<CheckBox
       IsChecked="{Binding IsRestrictedNetwork, Mode=TwoWay}"
       Grid.Row="2"
-      Content="{Binding [RestrictedNetwork]}" />
+      Content="{Binding [RestrictedNetwork]}" />-->
     <Button
       Command="{Binding OKCommand}"
       IsEnabled="{Binding IsButtonEnabled}"
