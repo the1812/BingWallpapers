@@ -168,6 +168,13 @@ namespace BingWallpapers.ViewModel
                 Title = this["FailedTitle"];
                 Message = ex.Message;
             }
+#if !DEBUG
+            catch (Exception ex)
+            {
+                Title = this["FailedTitle"];
+                Message = ex.Message;
+            }
+#endif
             finally
             {
                 CancelButtonVisibility = Visibility.Collapsed;

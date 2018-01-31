@@ -127,6 +127,12 @@ namespace BingWallpapers.Model
                 {
                     return;
                 }
+#if !DEBUG
+                catch (Exception ex)
+                {
+                    return;
+                }
+#endif
                 finally
                 {
                     IsInfoDownloading = false;
@@ -176,6 +182,12 @@ namespace BingWallpapers.Model
                 {
                     return;
                 }
+#if !DEBUG
+                catch (Exception ex)
+                {
+                    return;
+                }
+#endif
                 finally
                 {
                     IsDownloading = false;
