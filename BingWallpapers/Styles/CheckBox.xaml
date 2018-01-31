@@ -25,7 +25,7 @@
       Value="2" />
     <Setter
       Property="FontSize"
-      Value="16" />
+      Value="18" />
     <Setter
       Property="Height"
       Value="40" />
@@ -49,8 +49,8 @@
 
 
             <Rectangle
-              RadiusX="2"
-              RadiusY="2"
+              RadiusX="4"
+              RadiusY="4"
               Opacity="0"
               x:Name="circle"
               RenderTransformOrigin="0.5,0.5"
@@ -74,14 +74,14 @@
               Opacity="0"
               Background="{DynamicResource DwmBrush}"
               x:Name="mask"
-              CornerRadius="2">
+              CornerRadius="4">
               
             </Border>
             <Border
               Margin="5"
               BorderBrush="{TemplateBinding BorderBrush}"
               BorderThickness="{TemplateBinding BorderThickness}"
-              CornerRadius="2">
+              CornerRadius="4">
               <Viewbox
                 Height="20"
                 Width="20"

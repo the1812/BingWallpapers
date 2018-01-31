@@ -17,6 +17,7 @@ namespace BingWallpapers.Languages
                 "Browse",
                 "Error",
                 "PathNotExist",
+                "RestrictedNetwork",
             };
             simplifiedChinese = new List<string>
             {
@@ -25,6 +26,7 @@ namespace BingWallpapers.Languages
                 "浏览",
                 "错误",
                 "下载位置不存在。",
+                "网络受限",
             };
             americanEnglish = new List<string>
             {
@@ -33,6 +35,7 @@ namespace BingWallpapers.Languages
                 "Browse",
                 "Error",
                 "Download folder not exist.",
+                "Restricted network",
             };
         }
     }

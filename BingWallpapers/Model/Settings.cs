@@ -17,7 +17,16 @@ namespace BingWallpapers.Model
             {
                 file.Load();
                 var content = file.ObjectContent;
-                DownloadPath = content[nameof(DownloadPath)].StringValue;
+                if (content.ContainsName(nameof(DownloadPath)) &&
+                    content.ContainsName(nameof(RestrictedNetwork)))
+                {
+                    DownloadPath = content[nameof(DownloadPath)].StringValue;
+                    RestrictedNetwork = content[nameof(RestrictedNetwork)].BooleanValue.Value;
+                }
+                else
+                {
+                    fillDefault();
+                }
             }
             else
             {
@@ -31,15 +40,17 @@ namespace BingWallpapers.Model
                 ObjectContent = new JsonObject
                 {
                     new JsonProperty(nameof(DownloadPath), DownloadPath),
+                    new JsonProperty(nameof(RestrictedNetwork), RestrictedNetwork),
                 },
             };
             file.Save();
         }
         private static void fillDefault()
         {
-
             DownloadPath = "";
+            RestrictedNetwork = false;
         }
         public static string DownloadPath { get; set; } = "";
+        public static bool RestrictedNetwork { get; set; } = false;
     }
 }
