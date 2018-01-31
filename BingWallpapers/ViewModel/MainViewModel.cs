@@ -46,18 +46,7 @@ namespace BingWallpapers.ViewModel
         public static MainViewModel Current { get; private set; }
         private Storyboard FadeIn => View.FindResource("FadeIn") as Storyboard;
         private Storyboard FadeOut => View.FindResource("FadeOut") as Storyboard;
-
-        //private double frameOpacity = 0;
-        //public double FrameOpacity
-        //{
-        //    get => frameOpacity;
-        //    set
-        //    {
-        //        frameOpacity = value;
-        //        OnPropertyChanged(nameof(FrameOpacity));
-        //    }
-        //}
-
+        
         private Uri frameSource = null;
         public Uri FrameSource
         {
