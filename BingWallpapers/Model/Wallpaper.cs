@@ -96,6 +96,12 @@ namespace BingWallpapers.Model
                         var info = client.DownloadStringAsTask(InfoUrl, tokenSource.Token).Result;
                         var parseResult = JsonObject.TryParse(info, out var json);
                         Debug.Assert(parseResult);
+#if !DEBUG
+                        if (!parseResult)
+                        {
+                            return;
+                        }
+#endif
                         json = json["images"].ArrayValue[0].ObjectValue;
                         var timeString = json["fullstartdate"].StringValue;
                         Date = new DateTime(
