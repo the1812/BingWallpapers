@@ -82,6 +82,7 @@
     <Compile Include="Languages\WizardLanguage.cs" />
     <Compile Include="Model\ImageProcesser.cs" />
     <Compile Include="Model\Locales.cs" />
+    <Compile Include="Model\RectangleToGeometryConverter.cs" />
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Model\Wallpaper.cs" />
     <Compile Include="ViewModel\BindingCommand.cs" />
@@ -135,6 +136,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Styles\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\CheckBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

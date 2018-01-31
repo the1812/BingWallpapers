@@ -18,6 +18,8 @@
         Height="1*" />
       <RowDefinition
         Height="1*" />
+      <RowDefinition
+        Height="1*" />
     </Grid.RowDefinitions>
     <Viewbox
       Stretch="Uniform"
@@ -49,10 +51,13 @@
         Width="150"
         Content="{Binding [Browse]}" />
     </Grid>
+    <CheckBox
+      Grid.Row="2"
+      Content="test" />
     <Button
       Command="{Binding OKCommand}"
       IsEnabled="{Binding IsButtonEnabled}"
-      Grid.Row="2"
+      Grid.Row="3"
       Height="60"
       Width="200"
       FontSize="22"
