@@ -79,6 +79,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="InstanceChecker.cs" />
     <Compile Include="Languages\CheckLanguage.cs" />
     <Compile Include="Languages\WizardLanguage.cs" />
     <Compile Include="Model\ImageProcesser.cs" />

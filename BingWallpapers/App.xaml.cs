@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -33,6 +34,11 @@ namespace BingWallpapers
                     return Assembly.Load(assemblyData);
                 }
             };
+            if (!InstanceChecker.IsUniqueInstance)
+            {
+                InstanceChecker.SwitchToRunningInstance();
+                Shutdown();
+            }
             Settings.Load();
             if (e.Args.Length > 0 && e.Args[0].ToLower() == "--silent")
             {
