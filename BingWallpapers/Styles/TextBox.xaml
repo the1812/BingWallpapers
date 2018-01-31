@@ -42,7 +42,7 @@
       Value="true" />
     <Setter
       Property="MaxWidth"
-      Value="600" />
+      Value="1000" />
     <Setter
       Property="Template">
       <Setter.Value>

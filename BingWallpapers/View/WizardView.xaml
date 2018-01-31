@@ -30,6 +30,7 @@
     </Viewbox>
 
     <Grid
+      Margin="50,0"
       Grid.Row="1">
       <Grid.ColumnDefinitions>
         <ColumnDefinition
@@ -38,6 +39,7 @@
           Width="1*" />
       </Grid.ColumnDefinitions>
       <TextBox
+        Margin="50,0,50,0"
         x:Name="textPath"
         Text="{Binding Path, Mode=TwoWay}"
         Height="40" />
