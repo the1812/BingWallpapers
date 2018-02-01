@@ -40,7 +40,20 @@ namespace BingWallpapers.Model
                     new JsonProperty(nameof(DownloadPath), DownloadPath),
                 },
             };
-            file.Save();
+            try
+            {
+                file.Save();
+            }
+            catch (UnauthorizedAccessException)
+            {
+
+            }
+#if !DEBUG
+            catch (Exception)
+            {
+
+            }
+#endif
         }
         private static void fillDefault()
         {
