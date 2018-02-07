@@ -6,7 +6,7 @@ This app will ask you to select download folder at first run. It will be saved i
 > You can reset settings by deleting `settings.json`.
 
 ## Work silently
-Start with the command line parameter `-silent`.
+Start with the command line parameter `--silent`.
 
 ## Supported Language
 - English (US) **(Default)**
