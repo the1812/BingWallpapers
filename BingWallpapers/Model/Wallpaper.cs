@@ -10,27 +10,37 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Ace.Web;
+using System.Collections.Concurrent;
+using System.Globalization;
 
 namespace BingWallpapers.Model
 {
     sealed class Wallpaper
     {
-        private static HashSet<string> jsonHash = new HashSet<string>();
-        private static HashSet<byte[]> imageHash = new HashSet<byte[]>();
-        public static void ResetHash()
+        private static ConcurrentBag<string> jsonHashs = new ConcurrentBag<string>();
+        private static ConcurrentBag<byte[]> imageDatas = new ConcurrentBag<byte[]>();
+        public static void ResetDownloadedInfo()
         {
-            jsonHash.Clear();
-            imageHash.Clear();
+            void clearBag<T>(ConcurrentBag<T> bag)
+            {
+                //Though not atomic, ResetHash() is called by only one thread.
+                while (!bag.IsEmpty)
+                {
+                    bag.TryTake(out var item);
+                }
+            };
+            clearBag(jsonHashs);
+            clearBag(imageDatas);
             DownloadedCount = 0;
             foreach (var file in new DirectoryInfo(Settings.DownloadPath).EnumerateFiles())
             {
-                imageHash.Add(ImageProcesser.LoadFromFile(file.FullName));
+                imageDatas.Add(ImageProcesser.LoadFromFile(file.FullName));
             }
         }
         public static int DownloadedCount { get; private set; } = 0;
         private static bool containsData(byte[] data)
         {
-            foreach (var image in imageHash)
+            foreach (var image in imageDatas)
             {
                 if (Enumerable.SequenceEqual(data, image))
                 {
@@ -41,6 +51,7 @@ namespace BingWallpapers.Model
             return false;
         }
         public string FriendlyLocaleName { get; private set; } = "Unknown";
+        //public string FriendlyLocaleName => new CultureInfo(LocaleName).DisplayName;
         public string LocaleName { get; private set; } = "Unknown";
         public string FileName => $"{Date.ToShortDateString()}-{LocaleName}.jpg";
         public string FullFileName => $"{Settings.DownloadPath.Backslash()}{FileName}";
@@ -66,6 +77,7 @@ namespace BingWallpapers.Model
         }
         public string Copyright { get; private set; }
         public string Hash { get; private set; }
+        public DownloadSpeed DownloadSpeed { get; private set; } = new DownloadSpeed(0);
         private WebClient getWebClient()
         {
             var webClient = new WebClient
@@ -80,6 +92,7 @@ namespace BingWallpapers.Model
             LocaleName = locale;
             FriendlyLocaleName = friendlyName;
         }
+
         public Task DownloadInfo()
         {
             return Task.Run(() =>
@@ -92,6 +105,7 @@ namespace BingWallpapers.Model
                 {
                     using (var client = getWebClient())
                     {
+                        //client.DownloadProgressChanged += DownloadSpeed.GetProgressHandler();
                         IsInfoDownloading = true;
                         var info = client.DownloadStringAsTask(InfoUrl, tokenSource.Token).Result;
                         var parseResult = JsonObject.TryParse(info, out var json);
@@ -137,6 +151,7 @@ namespace BingWallpapers.Model
                 finally
                 {
                     IsInfoDownloading = false;
+                    DownloadSpeed.Reset();
                 }
             });
         }
@@ -157,18 +172,19 @@ namespace BingWallpapers.Model
                 {
                     using (var client = getWebClient())
                     {
+                        //client.DownloadProgressChanged += DownloadSpeed.GetProgressHandler();
                         IsDownloading = true;
-                        if (!jsonHash.Contains(Hash)/* && IsNewToday*/)
+                        if (!jsonHashs.Contains(Hash)/* && IsNewToday*/)
                         {
                             var data = client.DownloadDataAsTask(DownloadUrl, tokenSource.Token).Result;
                             Debug.WriteLine($"Data fetched: {LocaleName}-{data.GetHashCode()}");
-                            if (!imageHash.Contains(data) && !containsData(data))
+                            if (!imageDatas.Contains(data) && !containsData(data)/* byte-by-byte compare */)
                             {
+                                imageDatas.Add(data);
+                                jsonHashs.Add(Hash);
                                 ImageProcesser.SaveToFile(data, FullFileName);
                                 Debug.WriteLine($"Downloaded: {LocaleName}");
                                 DownloadedCount++;
-                                imageHash.Add(data);
-                                jsonHash.Add(Hash);
                             }
                         }
                     }
@@ -192,6 +208,7 @@ namespace BingWallpapers.Model
                 finally
                 {
                     IsDownloading = false;
+                    DownloadSpeed.Reset();
                 }
             });
         }
