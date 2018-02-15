@@ -96,6 +96,7 @@ namespace BingWallpapers.Model
             }
         }
         public string Copyright { get; private set; }
+        public string Title { get; private set; }
         public string Hash { get; private set; }
         public DownloadSpeed DownloadSpeed { get; private set; } = new DownloadSpeed(0);
         private WebClient getWebClient()
@@ -146,7 +147,18 @@ namespace BingWallpapers.Model
                             timeString.Substring(10, 2).ToInt32(),
                             0);
                         DownloadUrl = $"https://www.bing.com{json["url"].StringValue}";
-                        Copyright = json["copyright"].StringValue;
+                        var copyright = json["copyright"].StringValue;
+                        var match = copyright.Match(@"(.*?) \((©.*?)\)");
+                        if (match.Success)
+                        {
+                            Title = match.Groups[1].Value;
+                            Copyright = match.Groups[2].Value;
+                        }
+                        else
+                        {
+                            Title = "";
+                            Copyright = copyright;
+                        }
                         Hash = json["hsh"].StringValue;
                         Debug.WriteLineIf(IsDownloaded, $"Already downloaded: {LocaleName}-{Hash}");
                         IsInfoDownloaded = true;
