@@ -34,22 +34,30 @@
       Grid.Row="1">
       <Grid.ColumnDefinitions>
         <ColumnDefinition
+          Width="1*" />
+        <ColumnDefinition
           Width="4*" />
         <ColumnDefinition
           Width="1*" />
       </Grid.ColumnDefinitions>
+      <TextBlock
+        HorizontalAlignment="Left"
+        FontSize="18"
+        Foreground="#444"
+        Text="{Binding [DownloadPath]}" />
       <TextBox
-        Margin="50,0"
+        Grid.Column="1"
+        Margin="0,0,20,0"
         x:Name="textPath"
         Text="{Binding Path, Mode=TwoWay}"/>
       <Button
         IsEnabled="{Binding IsButtonEnabled}"
         Command="{Binding BrowseCommand}"
-        HorizontalAlignment="Left"
+        HorizontalAlignment="Stretch"
         Margin="5,0,0,0"
-        Grid.Column="1"
+        Grid.Column="2"
         Height="40"
-        Width="150"
+        MaxWidth="150"
         Content="{Binding [Browse]}" />
     </Grid>
     <!--<CheckBox
@@ -63,7 +71,7 @@
         <ColumnDefinition
           Width="1*" />
         <ColumnDefinition
-          Width="4*" />
+          Width="5*" />
       </Grid.ColumnDefinitions>
       <!--<Grid.RowDefinitions>
         <RowDefinition />
@@ -71,15 +79,14 @@
       </Grid.RowDefinitions>-->
 
       <TextBlock
-        Margin="0,0,10,0"
-        HorizontalAlignment="Right"
+        HorizontalAlignment="Left"
         FontSize="18"
         Foreground="#444"
         Text="{Binding [FileNameFormat]}" />
       <TextBox
         Text="{Binding FileNameFormat, Mode=TwoWay}"
         Grid.Column="1"
-        Margin="10,0,100,0" />
+        Margin="0,0,100,0" />
 
     </Grid>
     <Button

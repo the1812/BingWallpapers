@@ -19,8 +19,9 @@ namespace BingWallpapers.ViewModel
 {
     sealed partial class CheckViewModel : ViewModel<CheckView, CheckLanguage>
     {
-        public CheckViewModel()
+        public CheckViewModel(CheckView view)
         {
+            View = view;
             Language = new CheckLanguage();
             LocaleCount = Locales.Dictionary.Count * 3;
             Title = Language[CheckLanguage.Keys.Checking];

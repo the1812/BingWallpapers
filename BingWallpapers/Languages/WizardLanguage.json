@@ -6,7 +6,8 @@
     "错误",
     "下载位置不存在。",
     "网络受限",
-    "文件名格式:"
+    "文件名格式:",
+    "下载位置:"
   ],
   "en-US": [
     "Settings",
@@ -15,6 +16,7 @@
     "Error",
     "The selected path is not exist.",
     "Restricted Network",
-    "Filename Format:"
+    "Filename Format:",
+    "Download folder:"
   ]
 }
