@@ -151,7 +151,9 @@ namespace BingWallpapers.ViewModel
                             break;
                         }
                         //currentWallpaper = wallpaper;
-                        Title = String.Format(this["CheckingLocale"], wallpaper.FriendlyLocaleName);
+                        Title = String.Format(
+                            Language[CheckLanguage.Keys.CheckingLocale],
+                            wallpaper.FriendlyLocaleName);
                         await wallpaper.DownloadInfo();
                         CheckedLocale++;
                     }
@@ -163,39 +165,43 @@ namespace BingWallpapers.ViewModel
                             break;
                         }
                         //currentWallpaper = wallpaper;
-                        Title = String.Format(this["DownloadingLocale"], wallpaper.FriendlyLocaleName);
+                        Title = String.Format(
+                            Language[CheckLanguage.Keys.DownloadingLocale],
+                            wallpaper.FriendlyLocaleName);
                         await wallpaper.Download();
                         CheckedLocale += 2;
                     }
                     if (!canceled)
                     {
-                        Title = this["CompleteTitle"];
+                        Title = Language[CheckLanguage.Keys.CompleteTitle];
                     }
                     else
                     {
                         await Task.Delay(500);
-                        Title = this["CanceledTitle"];
+                        Title = Language[CheckLanguage.Keys.CanceledTitle];
                         CheckedLocale = LocaleCount * 2;
                     }
-                    Message = String.Format(this["CompleteMessage"], Wallpaper.DownloadedCount);
+                    Message = String.Format(
+                        Language[CheckLanguage.Keys.CompleteMessage], 
+                        Wallpaper.DownloadedCount);
                 }
                 catch (Exception ex)
                 when (ex is WebException ||
                     ex is InvalidOperationException ||
                     (ex is AggregateException && ex.InnerException is WebException))
                 {
-                    Title = this["FailedTitle"];
+                    Title = Language[CheckLanguage.Keys.FailedTitle];
                     Message = ex.Message;
                 }
 #if !DEBUG
                 catch (Exception ex)
                 {
-                    Title = this["FailedTitle"];
+                    Title = Language[CheckLanguage.Keys.FailedTitle];
                     Message = ex.Message;
                 }
 #endif
-                finally
-                {
+            finally
+            {
                     CancelButtonVisibility = Visibility.Collapsed;
                     CompleteButtonVisibility = Visibility.Visible;
                     IsButtonEnabled = true;

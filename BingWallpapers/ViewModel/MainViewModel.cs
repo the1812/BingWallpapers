@@ -35,7 +35,7 @@ namespace BingWallpapers.ViewModel
                     Application.Current.Resources["DwmBrush"] = new SolidColorBrush(color);
                     Application.Current.Resources["TitleBarColor"] = new SolidColorBrush(DwmEffect.WindowTitleColor);
                 });
-                if (Directory.Exists(Settings.DownloadPath))
+                if (Settings.IsValid)
                 {
                     Navigate(new Uri("../View/CheckView.xaml", UriKind.Relative));
                 }

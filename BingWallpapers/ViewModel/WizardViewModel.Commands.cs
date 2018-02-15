@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Ace.Files.Json;
 using Ace.Wpf.Mvvm;
+using BingWallpapers.Languages;
 using BingWallpapers.Model;
 using BingWallpapers.View;
 
@@ -21,7 +22,7 @@ namespace BingWallpapers.ViewModel
                 IsButtonEnabled = false;
                 var dialog = new FolderBrowserDialog
                 {
-                    Description = this["Title"],
+                    Description = Language[WizardLanguage.Keys.Title],
                     SelectedPath = Path,
                     ShowNewFolderButton = true,
                 };
@@ -48,7 +49,21 @@ namespace BingWallpapers.ViewModel
                 IsButtonEnabled = false;
                 await Task.Run(() =>
                 {
-                    if (Directory.Exists(Path))
+                    if (!FileNameChecker.IsValid(FileNameFormat))
+                    {
+                        MessageBox.Show(
+                            Language[WizardLanguage.Keys.InvalidFileName],
+                            Language[WizardLanguage.Keys.Error],
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else if (!Directory.Exists(Path))
+                    {
+                        MessageBox.Show(
+                            Language[WizardLanguage.Keys.PathNotExist],
+                            Language[WizardLanguage.Keys.Error], 
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
                     {
                         Settings.DownloadPath = Path;
                         Settings.FileNameFormat = FileNameFormat;
@@ -58,10 +73,6 @@ namespace BingWallpapers.ViewModel
                         {
                             MainViewModel.Current.Navigate(uri);
                         });
-                    }
-                    else
-                    {
-                        MessageBox.Show(this["PathNotExist"], this["Error"], MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 });
                 IsButtonEnabled = true;

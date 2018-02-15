@@ -2,6 +2,7 @@
 using BingWallpapers.Languages;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -72,5 +73,15 @@ namespace BingWallpapers.Model
         public const string FormatMonth = @"${Month}";
         public const string FormatDay = @"${Day}";
         public const string FormatLocale = @"${Locale}";
+
+        public static bool IsValid
+        {
+            get
+            {
+                return
+                    Directory.Exists(DownloadPath) &&
+                    FileNameChecker.IsValid(FileNameFormat);
+            }
+        }
     }
 }

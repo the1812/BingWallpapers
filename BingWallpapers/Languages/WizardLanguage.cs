@@ -21,6 +21,7 @@ namespace BingWallpapers.Languages
             RestrictedNetwork,
             FileNameFormat,
             DownloadPath,
+            InvalidFileName,
         }
         public WizardLanguage()
         {

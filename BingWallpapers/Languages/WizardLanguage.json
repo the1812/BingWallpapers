@@ -7,7 +7,8 @@
     "下载位置不存在。",
     "网络受限",
     "文件名格式:",
-    "下载位置:"
+    "下载位置:",
+    "文件名中包含无效字符。"
   ],
   "en-US": [
     "Settings",
@@ -17,6 +18,7 @@
     "The selected path is not exist.",
     "Restricted Network",
     "Filename Format:",
-    "Download folder:"
+    "Download folder:",
+    "Filename format contains invalid characters."
   ]
 }
