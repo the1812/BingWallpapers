@@ -26,9 +26,17 @@ namespace BingWallpapers.Model
                     {
                         DownloadPath = content[nameof(DownloadPath)].StringValue;
                     }
+                    else
+                    {
+                        DownloadPath = "";
+                    }
                     if (content.ContainsName(nameof(FileNameFormat)))
                     {
                         FileNameFormat = content[nameof(FileNameFormat)].StringValue;
+                    }
+                    else
+                    {
+                        FileNameFormat = DefaultFileNameFormat;
                     }
                 }
                 catch

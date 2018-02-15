@@ -10,6 +10,6 @@ namespace BingWallpapers.Model
     static class FileNameChecker
     {
         public static bool IsValid(string fileName) 
-            => fileName.IndexOfAny(Path.GetInvalidFileNameChars()) < 0;
+            => (fileName?.IndexOfAny(Path.GetInvalidFileNameChars()) ?? 0) < 0;
     }
 }
