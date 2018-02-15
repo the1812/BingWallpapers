@@ -1,18 +1,20 @@
 ﻿{
   "zh-CN": [
-    "下载位置设定",
+    "设置",
     "确定",
     "浏览",
     "错误",
     "下载位置不存在。",
-    "网络受限"
+    "网络受限",
+    "文件名格式:"
   ],
   "en-US": [
-    "Title",
+    "Settings",
     "OK",
     "Browse",
     "Error",
-    "PathNotExist",
-    "RestrictedNetwork"
+    "The selected path is not exist.",
+    "Restricted Network",
+    "Filename Format:"
   ]
 }

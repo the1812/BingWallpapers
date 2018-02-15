@@ -44,6 +44,12 @@
       Property="MaxWidth"
       Value="1000" />
     <Setter
+      Property="Height"
+      Value="40" />
+    <Setter
+      Property="SnapsToDevicePixels"
+      Value="True" />
+    <Setter
       Property="Template">
       <Setter.Value>
         <ControlTemplate

@@ -41,8 +41,7 @@
       <TextBox
         Margin="50,0"
         x:Name="textPath"
-        Text="{Binding Path, Mode=TwoWay}"
-        Height="40" />
+        Text="{Binding Path, Mode=TwoWay}"/>
       <Button
         IsEnabled="{Binding IsButtonEnabled}"
         Command="{Binding BrowseCommand}"
@@ -66,14 +65,21 @@
         <ColumnDefinition
           Width="4*" />
       </Grid.ColumnDefinitions>
-      <Grid.RowDefinitions>
+      <!--<Grid.RowDefinitions>
         <RowDefinition />
         <RowDefinition />
-      </Grid.RowDefinitions>
+      </Grid.RowDefinitions>-->
 
-      <!--<TextBox
+      <TextBlock
+        Margin="0,0,10,0"
+        HorizontalAlignment="Right"
+        FontSize="18"
+        Foreground="#444"
+        Text="{Binding [FileNameFormat]}" />
+      <TextBox
+        Text="{Binding FileNameFormat, Mode=TwoWay}"
         Grid.Column="1"
-        Margin="50,0" />-->
+        Margin="10,0,100,0" />
 
     </Grid>
     <Button

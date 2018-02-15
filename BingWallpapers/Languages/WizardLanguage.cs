@@ -19,6 +19,7 @@ namespace BingWallpapers.Languages
             Error,
             PathNotExist,
             RestrictedNetwork,
+            FileNameFormat,
         }
         public WizardLanguage()
         {

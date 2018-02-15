@@ -36,5 +36,16 @@ namespace BingWallpapers.ViewModel
             }
         }
 
+        private string fileNameFormat = Settings.FileNameFormat;
+        public string FileNameFormat
+        {
+            get => fileNameFormat;
+            set
+            {
+                fileNameFormat = value;
+                OnPropertyChanged(nameof(FileNameFormat));
+            }
+        }
+
     }
 }

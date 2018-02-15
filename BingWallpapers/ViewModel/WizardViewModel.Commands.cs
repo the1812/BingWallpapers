@@ -51,6 +51,7 @@ namespace BingWallpapers.ViewModel
                     if (Directory.Exists(Path))
                     {
                         Settings.DownloadPath = Path;
+                        Settings.FileNameFormat = FileNameFormat;
                         Task.Delay(500).Wait();
                         var uri = new Uri("../View/CheckView.xaml", UriKind.Relative);
                         View.Dispatcher.Invoke(() =>

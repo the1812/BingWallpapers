@@ -34,6 +34,9 @@
       Property="FocusVisualStyle"
       Value="{x:Null}" />
     <Setter
+      Property="SnapsToDevicePixels"
+      Value="True" />
+    <Setter
       Property="Template">
       <Setter.Value>
         <ControlTemplate
