@@ -13,14 +13,20 @@ namespace BingWallpapers.Languages
             keys = new List<string>
             {
                 "WindowTitle",
+                "SettingsSaveFailedTitle",
+                "SettingsSaveFailedMessage",
             };
             simplifiedChinese = new List<string>
             {
                 "Bing 壁纸",
+                "错误",
+                "无法保存设置。",
             };
             americanEnglish = new List<string>
             {
                 "Bing Wallpapers",
+                "Error",
+                "Cannot save settings.",
             };
         }
     }

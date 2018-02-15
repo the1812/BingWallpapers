@@ -57,6 +57,11 @@
       IsChecked="{Binding IsRestrictedNetwork, Mode=TwoWay}"
       Grid.Row="2"
       Content="{Binding [RestrictedNetwork]}" />-->
+    <Grid
+      Margin="50,0"
+      Grid.Row="2">
+      
+    </Grid>
     <Button
       Command="{Binding OKCommand}"
       IsEnabled="{Binding IsButtonEnabled}"

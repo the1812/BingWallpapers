@@ -53,7 +53,18 @@ namespace BingWallpapers.Model
         public string FriendlyLocaleName { get; private set; } = "Unknown";
         //public string FriendlyLocaleName => new CultureInfo(LocaleName).DisplayName;
         public string LocaleName { get; private set; } = "Unknown";
-        public string FileName => $"{Date.ToShortDateString()}-{LocaleName}.jpg";
+        public string FileName
+        {
+            get
+            {
+                var fileName = Settings.FileNameFormat;
+                fileName = fileName.Replace(Settings.FormatYear, Date.Year.ToString());
+                fileName = fileName.Replace(Settings.FormatMonth, Date.Month.ToString("00"));
+                fileName = fileName.Replace(Settings.FormatDay, Date.Day.ToString("00"));
+                fileName = fileName.Replace(Settings.FormatLocale, LocaleName);
+                return $"{fileName}.jpg";
+            }
+        }
         public string FullFileName => $"{Settings.DownloadPath.Backslash()}{FileName}";
         private string InfoUrl => $"https://global.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt={LocaleName}";
         public string DownloadUrl { get; private set; }
@@ -182,7 +193,7 @@ namespace BingWallpapers.Model
                             {
                                 imageDatas.Add(data);
                                 jsonHashs.Add(Hash);
-                                ImageProcesser.SaveToFile(data, FullFileName);
+                                ImageProcesser.SaveToFile(data, this);
                                 Debug.WriteLine($"Downloaded: {LocaleName}");
                                 DownloadedCount++;
                             }

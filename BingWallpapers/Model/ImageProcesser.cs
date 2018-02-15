@@ -18,9 +18,9 @@ namespace BingWallpapers.Model
                 return data;
             }
         }
-        public static void SaveToFile(byte[] data, string fileName)
+        public static void SaveToFile(byte[] data, Wallpaper wallpaper)
         {
-            using (var stream = File.OpenWrite(fileName))
+            using (var stream = File.OpenWrite(wallpaper.FullFileName))
             {
                 stream.Write(data, 0, data.Length);
             }

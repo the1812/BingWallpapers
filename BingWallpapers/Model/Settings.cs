@@ -1,9 +1,11 @@
 ﻿using Ace.Files.Json;
+using BingWallpapers.Languages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BingWallpapers.Model
 {
@@ -15,20 +17,25 @@ namespace BingWallpapers.Model
             var file = new JsonFile(FileName);
             if (file.Exists)
             {
-                file.Load();
-                var content = file.ObjectContent;
-                if (content.ContainsName(nameof(DownloadPath)))
+                try
                 {
-                    DownloadPath = content[nameof(DownloadPath)].StringValue;
+                    file.Load();
+                    var content = file.ObjectContent;
+                    if (content.ContainsName(nameof(DownloadPath)))
+                    {
+                        DownloadPath = content[nameof(DownloadPath)].StringValue;
+                    }
+                    if (content.ContainsName(nameof(FileNameFormat)))
+                    {
+                        FileNameFormat = content[nameof(FileNameFormat)].StringValue;
+                    }
                 }
-                else
+                catch
                 {
-                    fillDefault();
+#if DEBUG
+                    throw;
+#endif
                 }
-            }
-            else
-            {
-                fillDefault();
             }
         }
         public static void Save()
@@ -38,15 +45,19 @@ namespace BingWallpapers.Model
                 ObjectContent = new JsonObject
                 {
                     new JsonProperty(nameof(DownloadPath), DownloadPath),
+                    new JsonProperty(nameof(FileNameFormat), FileNameFormat),
                 },
             };
             try
             {
                 file.Save();
             }
-            catch (UnauthorizedAccessException)
+            catch (UnauthorizedAccessException ex)
             {
-
+                var language = new MainLanguage();
+                var title = language["SettingsSaveFailedTitle"];
+                var message = language["SettingsSaveFailedMessage"] + Environment.NewLine + ex.Message;
+                MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Error);
             }
 #if !DEBUG
             catch (Exception)
@@ -55,11 +66,11 @@ namespace BingWallpapers.Model
             }
 #endif
         }
-        private static void fillDefault()
-        {
-
-            DownloadPath = "";
-        }
         public static string DownloadPath { get; set; } = "";
+        public static string FileNameFormat { get; set; } = $"{FormatYear}-{FormatMonth}-{FormatDay}-{FormatLocale}";
+        public const string FormatYear = @"${Year}";
+        public const string FormatMonth = @"${Month}";
+        public const string FormatDay = @"${Day}";
+        public const string FormatLocale = @"${Locale}";
     }
 }
