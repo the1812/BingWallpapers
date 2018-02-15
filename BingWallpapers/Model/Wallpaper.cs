@@ -57,12 +57,21 @@ namespace BingWallpapers.Model
         {
             get
             {
-                var fileName = Settings.FileNameFormat;
+                string fileName = null;
+                if (FileNameChecker.IsValid(Settings.FileNameFormat))
+                {
+                    fileName = Settings.FileNameFormat;
+                }
+                else
+                {
+                    fileName = Settings.DefaultFileNameFormat;
+                }
                 fileName = fileName.Replace(Settings.FormatYear, Date.Year.ToString());
                 fileName = fileName.Replace(Settings.FormatMonth, Date.Month.ToString("00"));
                 fileName = fileName.Replace(Settings.FormatDay, Date.Day.ToString("00"));
                 fileName = fileName.Replace(Settings.FormatLocale, LocaleName);
-                return $"{fileName}.jpg";
+
+                return fileName + ".jpg";
             }
         }
         public string FullFileName => $"{Settings.DownloadPath.Backslash()}{FileName}";

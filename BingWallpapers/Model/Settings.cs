@@ -68,7 +68,10 @@ namespace BingWallpapers.Model
 #endif
         }
         public static string DownloadPath { get; set; } = "";
-        public static string FileNameFormat { get; set; } = $"{FormatYear}-{FormatMonth}-{FormatDay}-{FormatLocale}";
+        public static string FileNameFormat { get; set; } = DefaultFileNameFormat;
+
+        public static readonly string DefaultFileNameFormat 
+            = $"{FormatYear}-{FormatMonth}-{FormatDay}-{FormatLocale}";
         public const string FormatYear = @"${Year}";
         public const string FormatMonth = @"${Month}";
         public const string FormatDay = @"${Day}";
