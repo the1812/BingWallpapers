@@ -1,0 +1,18 @@
+﻿{
+  "zh-CN": [
+    "下载位置设定",
+    "确定",
+    "浏览",
+    "错误",
+    "下载位置不存在。",
+    "网络受限"
+  ],
+  "en-US": [
+    "Title",
+    "OK",
+    "Browse",
+    "Error",
+    "PathNotExist",
+    "RestrictedNetwork"
+  ]
+}

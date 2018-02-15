@@ -24,7 +24,10 @@ namespace BingWallpapers.View
         public WizardView()
         {
             InitializeComponent();
-            DataContext = new WizardViewModel(this);
+            DataContext = new WizardViewModel
+            {
+                View = this
+            };
             Loaded += async (s, e) =>
             {
                 await Task.Delay(500);

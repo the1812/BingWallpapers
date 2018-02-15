@@ -1,0 +1,26 @@
+﻿{
+  "zh-CN": [
+    "正在检查新壁纸",
+    "取消",
+    "正在检查 {0}",
+    "完成",
+    "下载了{0}个壁纸。",
+    "检查完成",
+    "取消中",
+    "已取消",
+    "正在下载 {0}",
+    "下载失败"
+  ],
+  "en-US": [
+    "Checking for new wallpapers",
+    "Cancel",
+    "Checking {0}",
+    "Complete",
+    "Downloaded {0} wallpaper(s).",
+    "Check complete",
+    "Canceling",
+    "Cenceled",
+    "Downloading from {0}",
+    "Download failed"
+  ]
+}

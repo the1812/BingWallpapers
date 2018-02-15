@@ -1,42 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ace;
+using Ace.Wpf.Mvvm;
 
 namespace BingWallpapers.Languages
 {
-    sealed class WizardLanguage : Language
+    sealed class WizardLanguage : Language<WizardLanguage.Keys>
     {
-        protected override void LoadTranslationList()
+        public enum Keys
         {
-            keys = new List<string>
-            {
-                "Title",
-                "OK",
-                "Browse",
-                "Error",
-                "PathNotExist",
-                "RestrictedNetwork",
-            };
-            simplifiedChinese = new List<string>
-            {
-                "下载位置设定",
-                "确定",
-                "浏览",
-                "错误",
-                "下载位置不存在。",
-                "网络受限",
-            };
-            americanEnglish = new List<string>
-            {
-                "Select Download Folder",
-                "OK",
-                "Browse",
-                "Error",
-                "Download folder not exist.",
-                "Restricted network",
-            };
+            Title,
+            OK,
+            Browse,
+            Error,
+            PathNotExist,
+            RestrictedNetwork,
+        }
+        public WizardLanguage()
+        {
+            translations.AddRange(Translation.FromJson(
+                new Uri($"../Languages/{nameof(WizardLanguage)}.json", UriKind.Relative)));
         }
     }
 }

@@ -25,7 +25,10 @@ namespace BingWallpapers.View
         public CheckView()
         {
             InitializeComponent();
-            DataContext = new CheckViewModel(this);
+            DataContext = new CheckViewModel
+            {
+                View = this,
+            };
         }
         public void SetProgress(double progress)
         {

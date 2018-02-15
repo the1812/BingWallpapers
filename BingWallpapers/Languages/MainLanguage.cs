@@ -1,3 +1,5 @@
+using Ace;
+using Ace.Wpf.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,28 +8,18 @@ using System.Threading.Tasks;
 
 namespace BingWallpapers.Languages
 {
-    sealed class MainLanguage : Language
+    sealed class MainLanguage : Language<MainLanguage.Keys>
     {
-        protected override void LoadTranslationList()
+        public enum Keys
         {
-            keys = new List<string>
-            {
-                "WindowTitle",
-                "SettingsSaveFailedTitle",
-                "SettingsSaveFailedMessage",
-            };
-            simplifiedChinese = new List<string>
-            {
-                "Bing 壁纸",
-                "错误",
-                "无法保存设置。",
-            };
-            americanEnglish = new List<string>
-            {
-                "Bing Wallpapers",
-                "Error",
-                "Cannot save settings.",
-            };
+            WindowTitle,
+            SettingsSaveFailedTitle,
+            SettingsSaveFailedMessage,
+        }
+        public MainLanguage()
+        {
+            translations.AddRange(Translation.FromJson(
+                new Uri($"../Languages/{nameof(MainLanguage)}.json", UriKind.Relative)));
         }
     }
 }

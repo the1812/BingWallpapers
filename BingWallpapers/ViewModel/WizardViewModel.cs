@@ -1,4 +1,5 @@
-﻿using BingWallpapers.Languages;
+﻿using Ace.Wpf.Mvvm;
+using BingWallpapers.Languages;
 using BingWallpapers.Model;
 using BingWallpapers.View;
 using System;
@@ -11,7 +12,7 @@ namespace BingWallpapers.ViewModel
 {
     sealed partial class WizardViewModel : ViewModel<WizardView, WizardLanguage>
     {
-        public WizardViewModel(WizardView view) : base(view, new WizardLanguage()) { }
+        public WizardViewModel() => Language = new WizardLanguage();
 
         private bool isButtonEnabled = true;
         public bool IsButtonEnabled

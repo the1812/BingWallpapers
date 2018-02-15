@@ -13,13 +13,16 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using BingWallpapers.Model;
 using System.IO;
+using Ace.Wpf.Mvvm;
 
 namespace BingWallpapers.ViewModel
 {
     sealed partial class MainViewModel : ViewModel<MainView, MainLanguage>
     {
-        public MainViewModel(MainView view) : base(view, new MainLanguage())
+        public MainViewModel(MainView view) 
         {
+            Language = new MainLanguage();
+            View = view;
             if (DwmEffect.WindowTitleColor == Colors.White)
             {
                 view.Icon = new BitmapImage(new Uri("../Bing.Logo.ico", UriKind.Relative));

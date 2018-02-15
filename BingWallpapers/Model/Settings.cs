@@ -55,8 +55,8 @@ namespace BingWallpapers.Model
             catch (UnauthorizedAccessException ex)
             {
                 var language = new MainLanguage();
-                var title = language["SettingsSaveFailedTitle"];
-                var message = language["SettingsSaveFailedMessage"] + Environment.NewLine + ex.Message;
+                var title = language[MainLanguage.Keys.SettingsSaveFailedTitle];
+                var message = language[MainLanguage.Keys.SettingsSaveFailedMessage] + Environment.NewLine + ex.Message;
                 MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Error);
             }
 #if !DEBUG

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Ace.Files.Json;
+using Ace.Wpf.Mvvm;
 using BingWallpapers.Model;
 using BingWallpapers.View;
 

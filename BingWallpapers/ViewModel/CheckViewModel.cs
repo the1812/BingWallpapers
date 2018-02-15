@@ -1,4 +1,5 @@
 ﻿using Ace.Files.Json;
+using Ace.Wpf.Mvvm;
 using BingWallpapers.Languages;
 using BingWallpapers.Model;
 using BingWallpapers.View;
@@ -18,12 +19,13 @@ namespace BingWallpapers.ViewModel
 {
     sealed partial class CheckViewModel : ViewModel<CheckView, CheckLanguage>
     {
-        public CheckViewModel(CheckView view) : base(view, new CheckLanguage())
+        public CheckViewModel()
         {
+            Language = new CheckLanguage();
             LocaleCount = Locales.Dictionary.Count * 3;
-            Title = this["Checking"];
+            Title = Language[CheckLanguage.Keys.Checking];
             Message = "";
-            CancelButtonText = this["Cancel"];
+            CancelButtonText = Language[CheckLanguage.Keys.Cancel];
             startCheck();
         }
 
@@ -138,7 +140,7 @@ namespace BingWallpapers.ViewModel
                 {
                     if (!Directory.Exists(Settings.DownloadPath))
                     {
-                        throw new InvalidOperationException(new WizardLanguage()["PathNotExist"]);
+                        throw new InvalidOperationException(new WizardLanguage()[WizardLanguage.Keys.PathNotExist]);
                     }
                     foreach (var wallpaper in wallpapers)
                     {
