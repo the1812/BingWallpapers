@@ -1,5 +1,6 @@
 # BingWallpapers
-A tool for downloading wallpapers from Bing.
+A tool for downloading wallpapers from Bing homepage.
+Resolution: `1920x1080`
 
 ## Download folder
 This app will ask you to select download folder at first run. It will be saved in `settings.json` at working folder.
