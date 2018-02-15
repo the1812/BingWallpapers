@@ -37,6 +37,24 @@
       Property="SnapsToDevicePixels"
       Value="True" />
     <Setter
+      Property="FocusVisualStyle">
+      <Setter.Value>
+        <Style>
+          <Setter
+            Property="Control.Template">
+            <Setter.Value>
+              <ControlTemplate>
+                <Border
+                  CornerRadius="5"
+                  BorderThickness="2"
+                  BorderBrush="#80FFFFFF" />
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+        </Style>
+      </Setter.Value>
+    </Setter>
+    <Setter
       Property="Template">
       <Setter.Value>
         <ControlTemplate
