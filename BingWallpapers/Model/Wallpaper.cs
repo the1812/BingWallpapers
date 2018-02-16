@@ -46,7 +46,9 @@ namespace BingWallpapers.Model
             DownloadedCount = 0;
             foreach (var file in new DirectoryInfo(Settings.DownloadPath).EnumerateFiles())
             {
-                imageDatas.Add(ImageProcesser.LoadFromFile(file.FullName));
+                var data = ImageProcesser.LoadFromFile(file.FullName);
+                data = ImageProcesser.RemoveMetadata(data);
+                imageDatas.Add(data);
             }
         }
         public static int DownloadedCount { get; private set; } = 0;
@@ -171,12 +173,14 @@ namespace BingWallpapers.Model
                         if (!jsonHashs.Contains(Info.Hash)/* && IsNewToday*/)
                         {
                             var data = client.DownloadDataAsTask(Info.DownloadUrl, tokenSource.Token).Result;
+                            data = ImageProcesser.RemoveMetadata(data);
                             Debug.WriteLine($"Data fetched: {Info.LocaleName}-{data.GetHashCode()}");
                             if (!imageDatas.Contains(data) && !containsData(data)/* byte-by-byte compare */)
                             {
                                 imageDatas.Add(data);
                                 jsonHashs.Add(Info.Hash);
-                                ImageProcesser.SaveToFile(data, this);
+                                data = ImageProcesser.AddMetadata(data, Info);
+                                ImageProcesser.SaveToFile(data, Info);
                                 Debug.WriteLine($"Downloaded: {Info.LocaleName}");
                                 DownloadedCount++;
                             }
