@@ -46,6 +46,11 @@ namespace BingWallpapers.Model
 #endif
                 }
             }
+            else
+            {
+                DownloadPath = "";
+                FileNameFormat = DefaultFileNameFormat;
+            }
         }
         public static void Save()
         {
@@ -85,14 +90,8 @@ namespace BingWallpapers.Model
         public const string FormatDay = @"${Day}";
         public const string FormatLocale = @"${Locale}";
 
-        public static bool IsValid
-        {
-            get
-            {
-                return
-                    Directory.Exists(DownloadPath) &&
-                    FileNameChecker.IsValid(FileNameFormat);
-            }
-        }
+        public static bool IsValid => IsDownloadPathValid && IsFileNameFormatValid;
+        public static bool IsDownloadPathValid => Directory.Exists(DownloadPath);
+        public static bool IsFileNameFormatValid => FileNameChecker.IsValid(FileNameFormat);
     }
 }

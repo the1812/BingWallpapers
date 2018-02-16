@@ -22,7 +22,7 @@ namespace BingWallpapers.ViewModel
                 IsButtonEnabled = false;
                 var dialog = new FolderBrowserDialog
                 {
-                    Description = Language[WizardLanguage.Keys.Title],
+                    Description = Language[WizardLanguage.Keys.DownloadPath],
                     SelectedPath = Path,
                     ShowNewFolderButton = true,
                 };

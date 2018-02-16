@@ -193,9 +193,9 @@ namespace BingWallpapers.ViewModel
 #endif
             finally
             {
-                    CancelButtonVisibility = Visibility.Collapsed;
-                    CompleteButtonVisibility = Visibility.Visible;
-                    IsButtonEnabled = true;
+                CancelButtonVisibility = Visibility.Collapsed;
+                CompleteButtonVisibility = Visibility.Visible;
+                IsButtonEnabled = true;
             }
         }
     }

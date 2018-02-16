@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -39,6 +40,7 @@ namespace BingWallpapers
                 InstanceChecker.SwitchToRunningInstance();
                 Shutdown();
             }
+            //CultureInfo.CurrentUICulture = new CultureInfo("en-US");
             Settings.Load();
             if (e.Args.Length > 0 && e.Args[0].ToLower() == "--silent")
             {
