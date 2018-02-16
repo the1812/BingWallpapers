@@ -89,6 +89,7 @@
     <Compile Include="Model\RectangleToGeometryConverter.cs" />
     <Compile Include="Model\Settings.cs" />
     <Compile Include="Model\Wallpaper.cs" />
+    <Compile Include="Model\WallpaperInfo.cs" />
     <Compile Include="SilentChecker.cs" />
     <Compile Include="Languages\MainLanguage.cs" />
     <Compile Include="NotificationObject.cs" />

@@ -21,7 +21,7 @@ namespace BingWallpapers.Model
         }
         public static void SaveToFile(byte[] data, Wallpaper wallpaper)
         {
-            using (var stream = File.OpenWrite(wallpaper.FullFileName))
+            using (var stream = File.OpenWrite(wallpaper.Info.FullFileName))
             {
                 data = setMetadata(data, wallpaper);
                 stream.Write(data, 0, data.Length);
@@ -38,8 +38,8 @@ namespace BingWallpapers.Model
                 {
                     metadata = new BitmapMetadata("jpg");
                 }
-                metadata.Copyright = wallpaper.Copyright;
-                metadata.Title = wallpaper.Title;
+                metadata.Copyright = wallpaper.Info.Copyright;
+                metadata.Title = wallpaper.Info.Title;
 
                 var frame = decoder.Frames[0];
                 var encoder = new JpegBitmapEncoder();

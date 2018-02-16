@@ -153,7 +153,7 @@ namespace BingWallpapers.ViewModel
                         //currentWallpaper = wallpaper;
                         Title = String.Format(
                             Language[CheckLanguage.Keys.CheckingLocale],
-                            wallpaper.FriendlyLocaleName);
+                            wallpaper.Info.FriendlyLocaleName);
                         await wallpaper.DownloadInfo();
                         CheckedLocale++;
                     }
@@ -167,7 +167,7 @@ namespace BingWallpapers.ViewModel
                         //currentWallpaper = wallpaper;
                         Title = String.Format(
                             Language[CheckLanguage.Keys.DownloadingLocale],
-                            wallpaper.FriendlyLocaleName);
+                            wallpaper.Info.FriendlyLocaleName);
                         await wallpaper.Download();
                         CheckedLocale += 2;
                     }
