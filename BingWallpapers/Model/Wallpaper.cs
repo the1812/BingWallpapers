@@ -31,7 +31,7 @@ namespace BingWallpapers.Model
             }
             return false;
         }
-        public static void ResetDownloadedInfo()
+        public static Task ResetDownloadedInfo()
         {
             void clearBag<T>(ConcurrentBag<T> bag)
             {
@@ -44,12 +44,15 @@ namespace BingWallpapers.Model
             clearBag(jsonHashs);
             clearBag(imageDatas);
             DownloadedCount = 0;
-            foreach (var file in new DirectoryInfo(Settings.DownloadPath).EnumerateFiles())
+            return Task.Run(() =>
             {
-                var data = ImageProcesser.LoadFromFile(file.FullName);
-                data = ImageProcesser.RemoveMetadata(data);
-                imageDatas.Add(data);
-            }
+                foreach (var file in new DirectoryInfo(Settings.DownloadPath).EnumerateFiles())
+                {
+                    var data = ImageProcesser.LoadFromFile(file.FullName);
+                    data = ImageProcesser.RemoveMetadata(data);
+                    imageDatas.Add(data);
+                }
+            });
         }
         public static int DownloadedCount { get; private set; } = 0;
 

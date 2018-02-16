@@ -20,7 +20,8 @@ namespace BingWallpapers.Languages
             Canceling,
             CanceledTitle,
             DownloadingLocale,
-            FailedTitle
+            FailedTitle,
+            Preparing,
         }
         public CheckLanguage()
         {

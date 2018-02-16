@@ -18,7 +18,7 @@ namespace BingWallpapers
                 return;
             }
             var wallpapers = Locales.Wallpapers;
-            Wallpaper.ResetDownloadedInfo();
+            Wallpaper.ResetDownloadedInfo().Wait();
             try
             {
                 foreach (var wallpaper in wallpapers)

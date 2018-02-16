@@ -9,7 +9,8 @@
     "取消中",
     "已取消",
     "正在下载 {0}",
-    "下载失败"
+    "下载失败",
+    "准备中"
   ],
   "en-US": [
     "Checking for new wallpapers",
@@ -21,6 +22,7 @@
     "Canceling",
     "Cenceled",
     "Downloading from {0}",
-    "Download failed"
+    "Download failed",
+    "Preparing"
   ]
 }

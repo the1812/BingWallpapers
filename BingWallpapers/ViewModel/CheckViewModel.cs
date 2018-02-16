@@ -125,88 +125,78 @@ namespace BingWallpapers.ViewModel
         {
             canceled = false;
             wallpapers = Locales.Wallpapers;
-            Wallpaper.ResetDownloadedInfo();
-            //Wallpaper currentWallpaper = null;
+            Title = Language[CheckLanguage.Keys.Preparing];
+            await Wallpaper.ResetDownloadedInfo();
             CheckedLocale = 0;
-            //using (var timer = new Timer(o =>
-            //{
-            //    if (currentWallpaper != null && currentWallpaper.DownloadSpeed.BytesPerSecond != 0)
-            //    {
-            //        Debug.WriteLine(currentWallpaper.DownloadSpeed.Speed);
-            //        Message = currentWallpaper.DownloadSpeed.Speed;
-            //    }
-            //}, null, 0, 500))
-            //{
-                try
+            try
+            {
+                if (!Directory.Exists(Settings.DownloadPath))
                 {
-                    if (!Directory.Exists(Settings.DownloadPath))
-                    {
-                        throw new InvalidOperationException(new WizardLanguage()[WizardLanguage.Keys.PathNotExist]);
-                    }
-                    foreach (var wallpaper in wallpapers)
-                    {
-                        if (canceled)
-                        {
-                            //currentWallpaper = null;
-                            break;
-                        }
-                        //currentWallpaper = wallpaper;
-                        Title = String.Format(
-                            Language[CheckLanguage.Keys.CheckingLocale],
-                            wallpaper.Info.FriendlyLocaleName);
-                        await wallpaper.DownloadInfo();
-                        CheckedLocale++;
-                    }
-                    foreach (var wallpaper in wallpapers)
-                    {
-                        if (canceled)
-                        {
-                            //currentWallpaper = null;
-                            break;
-                        }
-                        //currentWallpaper = wallpaper;
-                        Title = String.Format(
-                            Language[CheckLanguage.Keys.DownloadingLocale],
-                            wallpaper.Info.FriendlyLocaleName);
-                        await wallpaper.Download();
-                        CheckedLocale += 2;
-                    }
-                    if (!canceled)
-                    {
-                        Title = Language[CheckLanguage.Keys.CompleteTitle];
-                    }
-                    else
-                    {
-                        await Task.Delay(500);
-                        Title = Language[CheckLanguage.Keys.CanceledTitle];
-                        CheckedLocale = LocaleCount * 2;
-                    }
-                    Message = String.Format(
-                        Language[CheckLanguage.Keys.CompleteMessage], 
-                        Wallpaper.DownloadedCount);
+                    throw new InvalidOperationException(new WizardLanguage()[WizardLanguage.Keys.PathNotExist]);
                 }
-                catch (Exception ex)
-                when (ex is WebException ||
-                    ex is InvalidOperationException ||
-                    (ex is AggregateException && ex.InnerException is WebException))
+                foreach (var wallpaper in wallpapers)
                 {
-                    Title = Language[CheckLanguage.Keys.FailedTitle];
-                    Message = ex.Message;
+                    if (canceled)
+                    {
+                        //currentWallpaper = null;
+                        break;
+                    }
+                    //currentWallpaper = wallpaper;
+                    Title = String.Format(
+                        Language[CheckLanguage.Keys.CheckingLocale],
+                        wallpaper.Info.FriendlyLocaleName);
+                    await wallpaper.DownloadInfo();
+                    CheckedLocale++;
                 }
+                foreach (var wallpaper in wallpapers)
+                {
+                    if (canceled)
+                    {
+                        //currentWallpaper = null;
+                        break;
+                    }
+                    //currentWallpaper = wallpaper;
+                    Title = String.Format(
+                        Language[CheckLanguage.Keys.DownloadingLocale],
+                        wallpaper.Info.FriendlyLocaleName);
+                    await wallpaper.Download();
+                    CheckedLocale += 2;
+                }
+                if (!canceled)
+                {
+                    Title = Language[CheckLanguage.Keys.CompleteTitle];
+                }
+                else
+                {
+                    await Task.Delay(500);
+                    Title = Language[CheckLanguage.Keys.CanceledTitle];
+                    CheckedLocale = LocaleCount * 2;
+                }
+                Message = String.Format(
+                    Language[CheckLanguage.Keys.CompleteMessage], 
+                    Wallpaper.DownloadedCount);
+            }
+            catch (Exception ex)
+            when (ex is WebException ||
+                ex is InvalidOperationException ||
+                (ex is AggregateException && ex.InnerException is WebException))
+            {
+                Title = Language[CheckLanguage.Keys.FailedTitle];
+                Message = ex.Message;
+            }
 #if !DEBUG
-                catch (Exception ex)
-                {
-                    Title = Language[CheckLanguage.Keys.FailedTitle];
-                    Message = ex.Message;
-                }
+            catch (Exception ex)
+            {
+                Title = Language[CheckLanguage.Keys.FailedTitle];
+                Message = ex.Message;
+            }
 #endif
             finally
             {
                     CancelButtonVisibility = Visibility.Collapsed;
                     CompleteButtonVisibility = Visibility.Visible;
                     IsButtonEnabled = true;
-                }
-            //}
+            }
         }
     }
 }
