@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Ace.Files;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using GdiBitmap = System.Drawing.Bitmap;
 
 namespace BingWallpapers.Model
 {
@@ -25,6 +27,19 @@ namespace BingWallpapers.Model
             {
                 //data = SetMetadata(data, info);
                 stream.Write(data, 0, data.Length);
+            }
+        }
+        public static byte[] ExtractPixelData(byte[] rawData)
+        {
+            using (var stream = new MemoryStream(rawData))
+            {
+                var image = new GdiBitmap(stream);
+                var data = new BinaryData();
+                for (var x = 0; x < 100; x++)
+                {
+                    data.Append(image.GetPixel(x, 0).ToArgb());
+                }
+                return data;
             }
         }
         public static byte[] AddMetadata(byte[] data, WallpaperInfo info)

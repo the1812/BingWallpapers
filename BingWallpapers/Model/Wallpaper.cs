@@ -12,11 +12,15 @@ using System.Threading.Tasks;
 using Ace.Web;
 using System.Collections.Concurrent;
 using System.Globalization;
+using System.Windows.Media.Imaging;
+using GdiBitmap = System.Drawing.Bitmap;
+using Ace.Files;
 
 namespace BingWallpapers.Model
 {
     sealed class Wallpaper
     {
+        private static byte[] testData;
         private static ConcurrentBag<string> jsonHashs = new ConcurrentBag<string>();
         private static ConcurrentBag<byte[]> imageDatas = new ConcurrentBag<byte[]>();
         private static bool containsData(byte[] data)
@@ -48,9 +52,12 @@ namespace BingWallpapers.Model
             {
                 foreach (var file in new DirectoryInfo(Settings.DownloadPath).EnumerateFiles())
                 {
-                    var data = ImageProcesser.LoadFromFile(file.FullName);
-                    data = ImageProcesser.RemoveMetadata(data);
+                    var data = ImageProcesser.ExtractPixelData(ImageProcesser.LoadFromFile(file.FullName));
                     imageDatas.Add(data);
+                    if (file.Name.Contains("2018-02-17-bs-ba"))
+                    {
+                        testData = data;
+                    }
                 }
             });
         }
@@ -171,19 +178,18 @@ namespace BingWallpapers.Model
                 {
                     using (var client = getWebClient())
                     {
-                        //client.DownloadProgressChanged += DownloadSpeed.GetProgressHandler();
                         IsDownloading = true;
-                        if (!jsonHashs.Contains(Info.Hash)/* && IsNewToday*/)
+                        if (!jsonHashs.Contains(Info.Hash))
                         {
-                            var data = client.DownloadDataAsTask(Info.DownloadUrl, tokenSource.Token).Result;
-                            data = ImageProcesser.RemoveMetadata(data);
-                            Debug.WriteLine($"Data fetched: {Info.LocaleName}-{data.GetHashCode()}");
-                            if (!imageDatas.Contains(data) && !containsData(data)/* byte-by-byte compare */)
+                            var rawData = client.DownloadDataAsTask(Info.DownloadUrl, tokenSource.Token).Result;
+                            rawData = ImageProcesser.AddMetadata(rawData, Info);
+                            var pixelData = ImageProcesser.ExtractPixelData(rawData);
+                            Debug.WriteLine($"Data fetched: {Info.LocaleName}-{rawData.GetHashCode()}");
+                            if (!imageDatas.Contains(pixelData) && !containsData(pixelData))
                             {
-                                imageDatas.Add(data);
+                                imageDatas.Add(pixelData);
                                 jsonHashs.Add(Info.Hash);
-                                data = ImageProcesser.AddMetadata(data, Info);
-                                ImageProcesser.SaveToFile(data, Info);
+                                ImageProcesser.SaveToFile(rawData, Info);
                                 Debug.WriteLine($"Downloaded: {Info.LocaleName}");
                                 DownloadedCount++;
                             }
